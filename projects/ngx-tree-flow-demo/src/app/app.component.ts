@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     const source = interval(1000);
 
     const subscribe = source.subscribe({
-      next: (_) => {
+      next: (t) => {
         // this.rotation ++;
 
         switch (this.data[0][0].state) {

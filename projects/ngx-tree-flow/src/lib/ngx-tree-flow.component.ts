@@ -13,6 +13,12 @@ export class NgxTreeFlowComponent {
   @Input('data')
   data: TreeFlowNode[][] = [];
 
+  @Input('width')
+  width: number = 500;
+
+  @Input('height')
+  height: number = 680;
+
   @Input('levelSpacing')
   levelSpacing: number = 65; //50 % 100
 
@@ -24,6 +30,7 @@ export class NgxTreeFlowComponent {
 
   @Input('nodeJoinRadius')
   nodeJoinRadius = 8;
+
   @Input('nodeJoinStrokeWidth')
   nodeJoinStrokeWidth: number = 2;
 
@@ -34,7 +41,7 @@ export class NgxTreeFlowComponent {
   rotation = 0;
 
   @Input('useLabels')
-  useLabels: boolean = true;
+  useLabels: boolean = false;
 
   @Input('useStartingJoinNode')
   useStartingJoinNode: boolean = true;
@@ -42,8 +49,6 @@ export class NgxTreeFlowComponent {
   @Input('useEndingJoinNode')
   useEndingJoinNode: boolean = true;
 
-  protected width: number = 500;
-  protected height: number = 680;
   protected viewBox: string | undefined = undefined;
   protected viewBoxNode: string | undefined = undefined;
   protected viewBoxJoinNode: string | undefined = undefined;
@@ -110,17 +115,19 @@ export class NgxTreeFlowComponent {
       this.design.push(designNodes);
 
       if (level.length >= 2) {
-        levelIndex++;
+        if (this.data.indexOf(level) + 1 != this.data.length || this.useEndingJoinNode) {
+          levelIndex++;
 
-        const joiningNode = new DesignTreeFlowNode(this.joinNode);
-        joiningNode.levelIndex = levelIndex;
-        joiningNode.dx = this.width / 2 - this.nodeRadius;
-        joiningNode.dy = (levelIndex - 1) * this.levelSpacing;
-        joiningNode.levelNodeCount = level.length;
-        joiningNode.nextLevelNodeCount = nextLevelIndex == -1 ? 0 : this.data[nextLevelIndex].length;
-        joiningNode.isJoinNode = true;
+          const joiningNode = new DesignTreeFlowNode(this.joinNode);
+          joiningNode.levelIndex = levelIndex;
+          joiningNode.dx = this.width / 2 - this.nodeRadius;
+          joiningNode.dy = (levelIndex - 1) * this.levelSpacing;
+          joiningNode.levelNodeCount = level.length;
+          joiningNode.nextLevelNodeCount = nextLevelIndex == -1 ? 0 : this.data[nextLevelIndex].length;
+          joiningNode.isJoinNode = true;
 
-        if (this.data.indexOf(level) + 1 != this.data.length || this.useEndingJoinNode) this.design.push([joiningNode]);
+          this.design.push([joiningNode]);
+        }
       }
     }
 
