@@ -1,0 +1,35 @@
+.node-default {
+  fill: black;
+  stroke: darkgray;
+  stroke-width: 2px;
+}
+
+.node-disabled {
+  fill: gray;
+  stroke: darkgray;
+  stroke-width: 2px;
+}
+
+.node-enabled {
+  fill: white;
+  stroke: lightgreen;
+  stroke-width: 2px;
+}
+
+.node-active {
+  fill: lightgreen;
+  stroke: green;
+  stroke-width: 2px;
+}
+
+.node-completed {
+  fill: green;
+  stroke: darkgreen;
+  stroke-width: 2px;
+}
+
+.node-completed {
+  fill: red;
+  stroke: darkred;
+  stroke-width: 2px;
+}

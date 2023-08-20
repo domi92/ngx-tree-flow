@@ -1,0 +1,75 @@
+<div style="height: 100%; width: auto;">
+  <svg [attr.transform]="'rotate(-'+rotation+')'" width="100%" height="100%"  [attr.viewBox]="viewBox" xmlns="http://www.w3.org/2000/svg" version="1.1" >
+    <?xml-stylesheet type="text/css" href="flow-graph.component.scss" ?>
+    <rect width="100%" height="100%" fill="darkgray"/>
+
+    <!-- connection lines -->
+    <g  *ngFor="let row of design; let rowIndex = index" [attr.transform]="verticalAlignTranslate">
+      <g  *ngFor="let node of row; let nodeIndex = index">
+        <!-- <g [attr.transform]="'translate('+ 50 * nodeIndex+','+ (rowIndex * lineSpacing) + ') scale(0.8)' "> -->
+
+        <!-- if is a join node we need to link all upper nodes -->
+        <g *ngIf="node.isJoinNode">
+          <g *ngFor="let _ of design[rowIndex -1]; let prev = index">
+            <line *ngIf="rowIndex != 0"
+            [attr.x1]="design[rowIndex -1][prev].dx + nodeRadius"
+            [attr.y1]="design[rowIndex -1][prev].dy + nodeRadius"
+            [attr.x2]="node.dx + nodeRadius"
+            [attr.y2]="node.dy + nodeRadius"
+            stroke="black" stroke-width="4" />
+          </g>
+        </g>
+
+        <g *ngIf="!node.isJoinNode">
+          <g *ngFor="let _ of design[rowIndex -1]; let prev = index">
+            <line *ngIf="rowIndex != 0"
+            [attr.x1]="design[rowIndex -1][0].dx + nodeRadius"
+            [attr.y1]="design[rowIndex -1][0].dy + nodeRadius"
+            [attr.x2]="node.dx + nodeRadius"
+            [attr.y2]="node.dy + nodeRadius"
+            stroke="black" stroke-width="4" />
+          </g>
+        </g >
+      </g >
+    </g >
+
+    <!-- nodes -->
+    <g  *ngFor="let row of design; let rowIndex = index" [attr.transform]="verticalAlignTranslate">
+      <g  *ngFor="let node of row; let nodeIndex = index">
+        <!-- <g [attr.transform]="'translate('+ 50 * nodeIndex+','+ (rowIndex * lineSpacing) + ') scale(0.8)' "> -->
+        <g>
+
+        <g *ngIf="node.isJoinNode">
+          <svg [attr.width]="nodeJoinRadius*2" [attr.height]="nodeJoinRadius*2"
+               [attr.viewBox]="viewBoxJoinNode"
+               [attr.x]="node.dx + nodeJoinRadius" [attr.y]="node.dy + nodeJoinRadius"
+               class="node-default">
+            <circle cx="50%" cy="50%" [attr.r]="nodeJoinRadius"/>
+          </svg>
+        </g>
+
+        <g *ngIf="!node.isJoinNode">
+          <svg [attr.width]="nodeRadius*2" [attr.height]="nodeRadius*2"
+               [attr.viewBox]="viewBoxNode"
+               [attr.x]="node.dx" [attr.y]="node.dy">
+            <circle cx="50%" cy="50%" [attr.r]="nodeRadius"
+
+                    [class.node-default]="node.state === states.default"
+                    [class.node-disabled]="node.state === states.disabled"
+                    [class.node-enabled]="node.state === states.enabled"
+                    [class.node-active]="node.state === states.active"
+                    [class.node-completed]="node.state === states.completed"
+                    [class.node-error]="node.state === states.error" />
+            <!-- <circle cx="50%" cy="50%" [attr.r]="nodeRadius" [attr.class]="'node-'+ states[node.state].toString()" /> -->
+            <text *ngIf="useLabels" transform-origin="center" [attr.transform]="'rotate('+rotation+')'" x="50%" y="50%"
+                  dominant-baseline="middle" text-anchor="middle" fill="white">{{node.label ?? "" }}</text>
+            <text *ngIf="!useLabels" transform-origin="center" [attr.transform]="'rotate('+rotation+')'" x="50%" y="50%"
+                  dominant-baseline="middle" text-anchor="middle" fill="white">{{node.id }}</text>
+          </svg>
+        </g>
+
+        </g >
+      </g >
+    </g >
+  </svg>
+</div>
