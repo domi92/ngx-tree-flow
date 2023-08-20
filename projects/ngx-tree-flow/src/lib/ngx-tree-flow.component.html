@@ -84,7 +84,7 @@
                 text-anchor="middle"
                 stroke-width="1"
               >
-                {{ node.label ?? '' }}
+                <tspan y="50%" x="50%">{{ node.label ?? '' }}</tspan>
               </text>
               <text
                 *ngIf="!useLabels"
@@ -95,7 +95,7 @@
                 dominant-baseline="middle"
                 text-anchor="middle"
               >
-                {{ node.id }}
+                <tspan y="50%" x="50%">{{ node.id }}</tspan>
               </text>
             </svg>
           </g>

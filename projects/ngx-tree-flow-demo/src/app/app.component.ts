@@ -9,19 +9,15 @@ import { interval } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'ngx-tree-flow-demo';
-
   protected data: TreeFlowNode[][] = [];
-  /**
-   *
-   */
-  constructor() {
+
+  ngOnInit(): void {
     const a = {
       id: 1,
       label: 'A',
       state: TreeFlowNodeState.default,
     };
-    this.data.push([a]);
+    // this.data.push([a]);
 
     const b: TreeFlowNode = {
       id: 2,
@@ -50,9 +46,7 @@ export class AppComponent implements OnInit {
     this.data.push([b, c]);
     this.data.push([b, c, e, c, c]);
     // this.data.push([e]);
-  }
 
-  ngOnInit(): void {
     const source = interval(1000);
 
     const subscribe = source.subscribe({

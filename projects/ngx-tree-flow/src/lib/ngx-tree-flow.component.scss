@@ -1,83 +1,85 @@
 :host {
-  --fill-color-node-deafault: rgb(87, 87, 87);
-  --stroke-color-node-deafault: darkgray;
-  --fill-color-node-disabled: darkgray;
-  --stroke-color-node-disabled: darkgray;
-  --fill-color-node-enabled: rgb(87, 87, 87);
-  --stroke-color-node-enabled: darkgray;
-  --fill-color-node-active: darkgray;
-  --stroke-color-node-active: black;
-  --fill-color-node-completed: white;
-  --stroke-color-node-completed: white;
-  --fill-color-node-error: red;
-  --stroke-color-node-error: darkred;
+  --ngx-tree-flow-fill-color-node-deafault: rgb(87, 87, 87);
+  --ngx-tree-flow-stroke-color-node-deafault: darkgray;
+  --ngx-tree-flow-fill-color-node-disabled: darkgray;
+  --ngx-tree-flow-stroke-color-node-disabled: darkgray;
+  --ngx-tree-flow-fill-color-node-enabled: rgb(87, 87, 87);
+  --ngx-tree-flow-stroke-color-node-enabled: darkgray;
+  --ngx-tree-flow-fill-color-node-active: darkgray;
+  --ngx-tree-flow-stroke-color-node-active: rgb(59, 59, 59);
+  --ngx-tree-flow-fill-color-node-completed: white;
+  --ngx-tree-flow-stroke-color-node-completed: white;
+  --ngx-tree-flow-fill-color-node-error: red;
+  --ngx-tree-flow-stroke-color-node-error: darkred;
 
-  --text-color-deafault: black;
-  --text-color-disabled: white;
-  --text-color-enabled: black;
-  --text-color-active: white;
-  --text-color-completed: black;
-  --text-color-error: white;
+  --ngx-tree-flow-text-color-deafault: black;
+  --ngx-tree-flow-text-color-disabled: white;
+  --ngx-tree-flow-text-color-enabled: black;
+  --ngx-tree-flow-text-color-active: white;
+  --ngx-tree-flow-text-color-completed: black;
+  --ngx-tree-flow-text-color-error: white;
+
+  --ngx-tree-flow-line-color: darkgray;
 }
 
 line {
-  stroke: darkgray;
+  stroke: var(--ngx-tree-flow-line-color);
 }
 
 .node-default {
-  fill: var(--fill-color-node-deafault);
-  stroke: var(--stroke-color-node-deafault);
+  fill: var(--ngx-tree-flow-fill-color-node-deafault);
+  stroke: var(--ngx-tree-flow-stroke-color-node-deafault);
 
   text {
-    stroke: var(--text-color-deafault);
-    fill: var(--text-color-deafault);
+    stroke: var(--ngx-tree-flow-text-color-deafault);
+    fill: var(--ngx-tree-flow-text-color-deafault);
   }
 }
 
 .node-disabled {
-  fill: var(--fill-color-node-disabled);
-  stroke: var(--stroke-color-node-disabled);
+  fill: var(--ngx-tree-flow-fill-color-node-disabled);
+  stroke: var(--ngx-tree-flow-stroke-color-node-disabled);
 
   text {
-    stroke: var(--text-color-disabled);
-    fill: var(--text-color-disabled);
+    stroke: var(--ngx-tree-flow-text-color-disabled);
+    fill: var(--ngx-tree-flow-text-color-disabled);
   }
 }
 
 .node-enabled {
-  fill: var(--fill-color-node-enabled);
-  stroke: var(--stroke-color-node-enabled);
+  fill: var(--ngx-tree-flow-fill-color-node-enabled);
+  stroke: var(--ngx-tree-flow-stroke-color-node-enabled);
   text {
-    stroke: var(--text-color-enabled);
-    fill: var(--text-color-enabled);
+    stroke: var(--ngx-tree-flow-text-color-enabled);
+    fill: var(--ngx-tree-flow-text-color-enabled);
   }
 }
 
 .node-active {
-  fill: var(--fill-color-node-active);
-  stroke: var(--stroke-color-node-active);
+  fill: var(--ngx-tree-flow-fill-color-node-active);
+  stroke: var(--ngx-tree-flow-stroke-color-node-active);
   text {
-    stroke: var(--text-color-active);
-    fill: var(--text-color-active);
+    stroke: var(--ngx-tree-flow-text-color-active);
+    fill: var(--ngx-tree-flow-text-color-active);
   }
 }
 
 .node-completed {
-  fill: var(--fill-color-node-completed);
-  stroke: var(--stroke-color-node-completed);
+  fill: var(--ngx-tree-flow-fill-color-node-completed);
+  stroke: var(--ngx-tree-flow-stroke-color-node-completed);
 
   text {
-    stroke: var(--text-color-completed);
-    fill: var(--text-color-completed);
+    stroke: var(--ngx-tree-flow-text-color-completed);
+    fill: var(--ngx-tree-flow-text-color-completed);
   }
 }
 
 .node-error {
-  fill: var(--fill-color-node-error);
-  stroke: var(--stroke-color-node-error);
+  fill: var(--ngx-tree-flow-fill-color-node-error);
+  stroke: var(--ngx-tree-flow-stroke-color-node-error);
 
   text {
-    stroke: var(--text-color-error);
-    fill: var(--text-color-error);
+    stroke: var(--ngx-tree-flow-text-color-error);
+    fill: var(--ngx-tree-flow-text-color-error);
   }
 }
