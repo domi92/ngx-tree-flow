@@ -17,13 +17,19 @@
   --ngx-tree-flow-text-color-enabled: black;
   --ngx-tree-flow-text-color-active: white;
   --ngx-tree-flow-text-color-completed: black;
-  --ngx-tree-flow-text-color-error: white;
+  --ngx-tree-flow-text-color-error: black;
+
+  --ngx-tree-flow-text-font-size: 0.9rem;
 
   --ngx-tree-flow-line-color: darkgray;
 }
 
 line {
   stroke: var(--ngx-tree-flow-line-color);
+}
+
+text {
+  font-size: var(--ngx-tree-flow-text-font-size);
 }
 
 .node-default {

@@ -13,11 +13,11 @@ export class NgxTreeFlowComponent {
   @Input('data')
   data: TreeFlowNode[][] = [];
 
-  @Input('width')
-  width: number = 500;
+  @Input('viewboxWidth')
+  viewboxWidth: number = 500;
 
-  @Input('height')
-  height: number = 680;
+  @Input('viewboxHeight')
+  viewboxHeight: number = 680;
 
   @Input('levelSpacing')
   levelSpacing: number = 65; //50 % 100
@@ -64,7 +64,7 @@ export class NgxTreeFlowComponent {
   constructor() {}
 
   ngOnInit(): void {
-    this.viewBox = `0 0 ${this.width} ${this.height}`;
+    this.viewBox = `0 0 ${this.viewboxWidth} ${this.viewboxHeight}`;
     this.viewBoxNode = `0 0 ${this.nodeRadius * 2 + this.nodeStrokeWidth} ${
       this.nodeRadius * 2 + this.nodeStrokeWidth
     }`;
@@ -88,7 +88,7 @@ export class NgxTreeFlowComponent {
       if (levelIndex == 1 && level.length >= 2) {
         const joiningNode = new DesignTreeFlowNode(this.joinNode);
         joiningNode.levelIndex = levelIndex;
-        joiningNode.dx = this.width / 2 - this.nodeRadius;
+        joiningNode.dx = this.viewboxWidth / 2 - this.nodeRadius;
         joiningNode.dy = (levelIndex - 1) * this.levelSpacing;
         joiningNode.levelNodeCount = level.length;
         joiningNode.nextLevelNodeCount = nextLevelIndex == -1 ? 0 : this.data[nextLevelIndex].length;
@@ -103,7 +103,7 @@ export class NgxTreeFlowComponent {
       for (let node of level) {
         const designNode = new DesignTreeFlowNode(node);
         designNode.levelIndex = levelIndex;
-        designNode.dx = nodeIndex * (this.width / (level.length + 1)) - this.nodeRadius;
+        designNode.dx = nodeIndex * (this.viewboxWidth / (level.length + 1)) - this.nodeRadius;
         designNode.dy = (levelIndex - 1) * this.levelSpacing;
         designNode.levelNodeCount = level.length;
         designNode.nextLevelNodeCount = nextLevelIndex === -1 ? 0 : this.data[nextLevelIndex].length;
@@ -120,7 +120,7 @@ export class NgxTreeFlowComponent {
 
           const joiningNode = new DesignTreeFlowNode(this.joinNode);
           joiningNode.levelIndex = levelIndex;
-          joiningNode.dx = this.width / 2 - this.nodeRadius;
+          joiningNode.dx = this.viewboxWidth / 2 - this.nodeRadius;
           joiningNode.dy = (levelIndex - 1) * this.levelSpacing;
           joiningNode.levelNodeCount = level.length;
           joiningNode.nextLevelNodeCount = nextLevelIndex == -1 ? 0 : this.data[nextLevelIndex].length;
@@ -131,7 +131,7 @@ export class NgxTreeFlowComponent {
       }
     }
 
-    const vShift = (this.height - this.levelSpacing * (this.design.length - 1)) / 2;
+    const vShift = (this.viewboxHeight - this.levelSpacing * (this.design.length - 1)) / 2;
     this.verticalAlignTranslate = `translate(0, ${vShift})`;
   }
 }
