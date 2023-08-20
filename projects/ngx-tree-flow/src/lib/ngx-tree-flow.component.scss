@@ -1,35 +1,83 @@
-.node-default {
-  fill: black;
+:host {
+  --fill-color-node-deafault: rgb(87, 87, 87);
+  --stroke-color-node-deafault: darkgray;
+  --fill-color-node-disabled: darkgray;
+  --stroke-color-node-disabled: darkgray;
+  --fill-color-node-enabled: rgb(87, 87, 87);
+  --stroke-color-node-enabled: darkgray;
+  --fill-color-node-active: darkgray;
+  --stroke-color-node-active: black;
+  --fill-color-node-completed: white;
+  --stroke-color-node-completed: white;
+  --fill-color-node-error: red;
+  --stroke-color-node-error: darkred;
+
+  --text-color-deafault: black;
+  --text-color-disabled: white;
+  --text-color-enabled: black;
+  --text-color-active: white;
+  --text-color-completed: black;
+  --text-color-error: white;
+}
+
+line {
   stroke: darkgray;
-  stroke-width: 2px;
+}
+
+.node-default {
+  fill: var(--fill-color-node-deafault);
+  stroke: var(--stroke-color-node-deafault);
+
+  text {
+    stroke: var(--text-color-deafault);
+    fill: var(--text-color-deafault);
+  }
 }
 
 .node-disabled {
-  fill: gray;
-  stroke: darkgray;
-  stroke-width: 2px;
+  fill: var(--fill-color-node-disabled);
+  stroke: var(--stroke-color-node-disabled);
+
+  text {
+    stroke: var(--text-color-disabled);
+    fill: var(--text-color-disabled);
+  }
 }
 
 .node-enabled {
-  fill: white;
-  stroke: lightgreen;
-  stroke-width: 2px;
+  fill: var(--fill-color-node-enabled);
+  stroke: var(--stroke-color-node-enabled);
+  text {
+    stroke: var(--text-color-enabled);
+    fill: var(--text-color-enabled);
+  }
 }
 
 .node-active {
-  fill: lightgreen;
-  stroke: green;
-  stroke-width: 2px;
+  fill: var(--fill-color-node-active);
+  stroke: var(--stroke-color-node-active);
+  text {
+    stroke: var(--text-color-active);
+    fill: var(--text-color-active);
+  }
 }
 
 .node-completed {
-  fill: green;
-  stroke: darkgreen;
-  stroke-width: 2px;
+  fill: var(--fill-color-node-completed);
+  stroke: var(--stroke-color-node-completed);
+
+  text {
+    stroke: var(--text-color-completed);
+    fill: var(--text-color-completed);
+  }
 }
 
-.node-completed {
-  fill: red;
-  stroke: darkred;
-  stroke-width: 2px;
+.node-error {
+  fill: var(--fill-color-node-error);
+  stroke: var(--stroke-color-node-error);
+
+  text {
+    stroke: var(--text-color-error);
+    fill: var(--text-color-error);
+  }
 }

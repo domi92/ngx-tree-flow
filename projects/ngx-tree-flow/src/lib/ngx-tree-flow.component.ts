@@ -10,13 +10,20 @@ import { DesignTreeFlowNode } from './resource/DesignTreeFlowNode';
   styleUrls: ['./ngx-tree-flow.component.scss'],
 })
 export class NgxTreeFlowComponent {
+  @Input('data')
+  data: TreeFlowNode[][] = [];
+
   @Input('levelSpacing')
-  levelSpacing: number = 75; //50 % 100
+  levelSpacing: number = 65; //50 % 100
 
   @Input('nodeRadius')
-  nodeRadius: number = 20; // 10 % 30
+  nodeRadius: number = 14; // 10 % 30
+  nodeStrokeWidth: number = 2;
 
-  nodeJoinRadius = 10;
+  nodeJoinRadius = 8;
+  nodeJoinStrokeWidth: number = 2;
+
+  lineStrokeWidth: number = 2;
 
   @Input('rotation')
   rotation = 0;
@@ -29,10 +36,7 @@ export class NgxTreeFlowComponent {
   protected viewBoxJoinNode: string | undefined = undefined;
   protected verticalAlignTranslate: string = `translate(0, 0)`;
 
-  protected data: TreeFlowNode[][] = [];
   protected design: DesignTreeFlowNode[][] = [];
-
-  protected a: TreeFlowNode;
 
   protected states = TreeFlowNodeState;
 
@@ -41,47 +45,16 @@ export class NgxTreeFlowComponent {
     state: TreeFlowNodeState.default,
   };
 
-  constructor() {
-    this.a = {
-      id: 1,
-      label: 'A',
-      state: TreeFlowNodeState.default,
-    };
-    this.data.push([this.a]);
-
-    const b: TreeFlowNode = {
-      id: 2,
-      label: 'B',
-      state: TreeFlowNodeState.disabled,
-    };
-    const c: TreeFlowNode = {
-      id: 3,
-      label: 'C',
-      state: TreeFlowNodeState.active,
-    };
-    this.data.push([b, c]);
-
-    const d: TreeFlowNode = {
-      id: 44,
-      label: 'D',
-      state: TreeFlowNodeState.completed,
-    };
-    this.data.push([d]);
-
-    const e: TreeFlowNode = {
-      id: 3,
-      label: 'E',
-      state: TreeFlowNodeState.error,
-    };
-    this.data.push([b, c]);
-    this.data.push([b, c, e, c, c]);
-    // this.data.push([e]);
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.viewBox = `0 0 ${this.width} ${this.height}`;
-    this.viewBoxNode = `0 0 ${this.nodeRadius * 2} ${this.nodeRadius * 2}`;
-    this.viewBoxJoinNode = `0 0 ${this.nodeJoinRadius * 2} ${this.nodeJoinRadius * 2}`;
+    this.viewBoxNode = `0 0 ${this.nodeRadius * 2 + this.nodeStrokeWidth} ${
+      this.nodeRadius * 2 + this.nodeStrokeWidth
+    }`;
+    this.viewBoxJoinNode = `0 0 ${this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth} ${
+      this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth
+    }`;
 
     //Create design collection
     let levelIndex = 0;
@@ -140,34 +113,5 @@ export class NgxTreeFlowComponent {
 
     const vShift = (this.height - this.levelSpacing * (this.design.length - 1)) / 2;
     this.verticalAlignTranslate = `translate(0, ${vShift})`;
-
-    const source = interval(1000);
-
-    const subscribe = source.subscribe({
-      next: (_) => {
-        // this.rotation ++;
-
-        switch (this.a.state) {
-          case TreeFlowNodeState.active:
-            this.a.state = TreeFlowNodeState.completed;
-            break;
-          case TreeFlowNodeState.completed:
-            this.a.state = TreeFlowNodeState.disabled;
-            break;
-          case TreeFlowNodeState.disabled:
-            this.a.state = TreeFlowNodeState.enabled;
-            break;
-          case TreeFlowNodeState.enabled:
-            this.a.state = TreeFlowNodeState.error;
-            break;
-          case TreeFlowNodeState.error:
-            this.a.state = TreeFlowNodeState.default;
-            break;
-          case TreeFlowNodeState.default:
-            this.a.state = TreeFlowNodeState.active;
-            break;
-        }
-      },
-    });
   }
 }
