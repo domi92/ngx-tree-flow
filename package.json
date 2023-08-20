@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build_lib": "ng build ngx-tree-flow ",
+    "copy_license": "copy .\\LICENSE .\\dist\\ngx-tree-flow",
+    "copy_files": "npm run copy_license",
+    "npm_pack": "cd dist/ngx-tree-flow && npm pack",
+    "package": "npm run build_lib && npm run copy_files && npm run npm_pack"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +28,7 @@
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^15.2.9",
     "@angular/cli": "~15.2.5",
     "@angular/compiler-cli": "^15.2.0",
     "@types/jasmine": "~4.3.0",
@@ -32,6 +38,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "ng-packagr": "^15.2.2",
     "typescript": "~4.9.4"
   }
 }

@@ -3,5 +3,117 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-tree-flow": {
+      "projectType": "library",
+      "root": "projects/ngx-tree-flow",
+      "sourceRoot": "projects/ngx-tree-flow/src",
+      "prefix": "",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-tree-flow/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-tree-flow/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-tree-flow/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-tree-flow/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"]
+          }
+        }
+      }
+    },
+    "ngx-tree-flow-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngx-tree-flow-demo",
+      "sourceRoot": "projects/ngx-tree-flow-demo/src",
+      "prefix": "ngx-demo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngx-tree-flow-demo",
+            "index": "projects/ngx-tree-flow-demo/src/index.html",
+            "main": "projects/ngx-tree-flow-demo/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/ngx-tree-flow-demo/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["projects/ngx-tree-flow-demo/src/favicon.ico", "projects/ngx-tree-flow-demo/src/assets"],
+            "styles": ["projects/ngx-tree-flow-demo/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-tree-flow-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-tree-flow-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-tree-flow-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/ngx-tree-flow-demo/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["projects/ngx-tree-flow-demo/src/favicon.ico", "projects/ngx-tree-flow-demo/src/assets"],
+            "styles": ["projects/ngx-tree-flow-demo/src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    }
   }
 }
