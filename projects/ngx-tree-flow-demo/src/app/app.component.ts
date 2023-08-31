@@ -18,18 +18,18 @@ export class AppComponent implements OnInit {
     this.linearData.push({
       id: 1,
       label: 'Start',
-      state: TreeFlowNodeState.default,
+      state: TreeFlowNodeState.completed,
     })
 
     this.linearData.push({
       id: 2,
       label: 'Step1',
-      state: TreeFlowNodeState.default,
+      state: TreeFlowNodeState.error,
     })
     this.linearData.push({
       id: 3,
       label: 'Complete',
-      state: TreeFlowNodeState.default,
+      state: TreeFlowNodeState.disabled,
     })
 
     const a = {

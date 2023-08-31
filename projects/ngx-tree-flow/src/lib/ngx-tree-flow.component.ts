@@ -51,6 +51,9 @@ export class NgxTreeFlowComponent implements OnInit {
    @Input('hideLinearModelLabel')
    hideLinearModelLabel = false;
 
+   @Input('disableAutoLineColor')
+   disableAutoLineColor: boolean = false;
+
    protected viewBox: string | undefined = undefined;
    protected viewBoxNode: string | undefined = undefined;
    protected viewBoxJoinNode: string | undefined = undefined;
