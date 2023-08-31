@@ -16,7 +16,7 @@ export class NgxTreeFlowComponent implements OnInit {
    viewboxWidth = 500;
 
    @Input('viewboxHeight')
-   viewboxHeight = 680;
+   viewboxHeightInput: number | undefined = undefined;
 
    @Input('levelSpacing')
    levelSpacing = 65; //50 % 100
@@ -64,6 +64,7 @@ export class NgxTreeFlowComponent implements OnInit {
    };
 
    private _data: TreeFlowNode[][] = [];
+   protected viewboxHeight!: number;
 
    constructor() {}
 
@@ -71,13 +72,7 @@ export class NgxTreeFlowComponent implements OnInit {
 
    ngOnInit(): void {
 
-      this.viewBox = `0 0 ${this.viewboxWidth} ${this.viewboxHeight}`;
-      this.viewBoxNode = `0 0 ${this.nodeRadius * 2 + this.nodeStrokeWidth} ${
-         this.nodeRadius * 2 + this.nodeStrokeWidth
-         }`;
-      this.viewBoxJoinNode = `0 0 ${this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth} ${
-         this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth
-         }`;
+
 
       //choose if data is a linear array or if it is nested with multiple possible elements
 
@@ -155,6 +150,21 @@ export class NgxTreeFlowComponent implements OnInit {
             }
          }
       }
+
+      if(this.viewboxHeightInput)
+        this.viewboxHeight = this.viewboxHeightInput;
+      else{
+        this.viewboxHeight = this.design.length * this.levelSpacing;
+      }
+
+
+      this.viewBox = `0 0 ${this.viewboxWidth} ${this.viewboxHeight}`;
+      this.viewBoxNode = `0 0 ${this.nodeRadius * 2 + this.nodeStrokeWidth} ${
+         this.nodeRadius * 2 + this.nodeStrokeWidth
+         }`;
+      this.viewBoxJoinNode = `0 0 ${this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth} ${
+         this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth
+         }`;
 
       let vShift = 0;
       if (this.design.length === 1) {
