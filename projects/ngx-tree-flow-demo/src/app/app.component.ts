@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     const e: TreeFlowNode = {
       id: 3,
       label: 'E',
-      state: TreeFlowNodeState.error,
+      state: TreeFlowNodeState.default,
     };
     this.data.push([b, c]);
     this.data.push([b, c, e, c, c]);
