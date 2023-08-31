@@ -1,11 +1,23 @@
-<div style="height: 450px; width: 90vw; background-color: rgb(15, 15, 15)">
-  <ngx-tree-flow
-    [rotation]="0"
-    [viewboxWidth]="350"
-    [viewboxHeight]="550"
-    [data]="data"
-    [levelSpacing]="66"
-    [useLabels]="true"
-    [useEndingJoinNode]="false"
-  ></ngx-tree-flow>
+<div style="display: flex; justify-content: space-evenly;">
+  <div style="height:60vh; width:48vw; background-color: rgb(15, 15, 15)">
+    <ngx-tree-flow
+      [rotation]="0"
+      [viewboxWidth]="350"
+      [viewboxHeight]="550"
+      [data]="data"
+      [levelSpacing]="66"
+      [useLabels]="true"
+      [useEndingJoinNode]="false"
+    ></ngx-tree-flow>
+  </div>
+  <div style="height: 60vh; width: 48vw; background-color: rgb(15, 15, 15)">
+    <ngx-tree-flow
+      [rotation]="0"
+      [viewboxWidth]="350"
+      [viewboxHeight]="550"
+      [data]="linearData"
+      [levelSpacing]="66"
+      [useEndingJoinNode]="false"
+    ></ngx-tree-flow>
+  </div>
 </div>

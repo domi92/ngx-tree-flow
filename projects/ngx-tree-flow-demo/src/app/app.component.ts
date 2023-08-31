@@ -11,7 +11,27 @@ import { interval } from 'rxjs';
 export class AppComponent implements OnInit {
   protected data: TreeFlowNode[][] = [];
 
+  protected linearData: TreeFlowNode[] = [];
+
   ngOnInit(): void {
+
+    this.linearData.push({
+      id: 1,
+      label: 'Start',
+      state: TreeFlowNodeState.default,
+    })
+
+    this.linearData.push({
+      id: 2,
+      label: 'Step1',
+      state: TreeFlowNodeState.default,
+    })
+    this.linearData.push({
+      id: 3,
+      label: 'Complete',
+      state: TreeFlowNodeState.default,
+    })
+
     const a = {
       id: 1,
       label: 'A',
