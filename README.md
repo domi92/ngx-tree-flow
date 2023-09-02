@@ -1,5 +1,9 @@
+# Example
+Component can be customized with different state colors, to use a dynamic or static line colors.
 
-![example](https://raw.githubusercontent.com/domi92/ngx-tree-flow/master/.github/example.jpg)
+Some example of final draw result.
+
+<img src="https://raw.githubusercontent.com/domi92/ngx-tree-flow/master/.github/example.jpg" width=65%/>
 
 # NgxTreeFlow
 
