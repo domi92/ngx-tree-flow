@@ -14,57 +14,72 @@ export class AppComponent implements OnInit {
   protected linearData: TreeFlowNode[] = [];
 
   ngOnInit(): void {
-
     this.linearData.push({
       id: 1,
       label: 'Start',
       state: TreeFlowNodeState.completed,
-    })
+    });
 
     this.linearData.push({
       id: 2,
       label: 'Step1',
       state: TreeFlowNodeState.error,
-    })
+    });
     this.linearData.push({
       id: 3,
       label: 'Complete',
       state: TreeFlowNodeState.disabled,
-    })
+    });
 
     const a = {
       id: 1,
       label: 'A',
-      state: TreeFlowNodeState.default,
+      state: TreeFlowNodeState.completed,
     };
     // this.data.push([a]);
 
     const b: TreeFlowNode = {
       id: 2,
       label: 'B',
-      state: TreeFlowNodeState.default,
+      state: TreeFlowNodeState.active,
     };
     const c: TreeFlowNode = {
       id: 3,
       label: 'C',
-      state: TreeFlowNodeState.default,
+      state: TreeFlowNodeState.disabled,
     };
-    this.data.push([b, c]);
-
     const d: TreeFlowNode = {
-      id: 44,
+      id: 4,
       label: 'D',
-      state: TreeFlowNodeState.error,
+      state: TreeFlowNodeState.enabled,
     };
-    this.data.push([d]);
-
     const e: TreeFlowNode = {
-      id: 3,
+      id: 5,
       label: 'E',
       state: TreeFlowNodeState.default,
     };
-    this.data.push([b, c]);
-    this.data.push([b, c, e, c, c]);
+    const f: TreeFlowNode = {
+      id: 6,
+      label: 'F',
+      state: TreeFlowNodeState.disabled,
+    };
+    const g: TreeFlowNode = {
+      id: 7,
+      label: 'G',
+      state: TreeFlowNodeState.disabled,
+    };
+    const h: TreeFlowNode = {
+      id: 8,
+      label: 'H',
+      state: TreeFlowNodeState.error,
+    };
+
+    this.data.push([a, b]);
+
+    this.data.push([c]);
+
+    this.data.push([d, e]);
+    this.data.push([f, g, h]);
     // this.data.push([e]);
 
     const source = interval(1000);
@@ -73,24 +88,24 @@ export class AppComponent implements OnInit {
       next: (t) => {
         // this.rotation ++;
 
-        switch (this.data[0][0].state) {
+        switch (h.state) {
           case TreeFlowNodeState.active:
-            this.data[0][0].state = TreeFlowNodeState.completed;
+            h.state = TreeFlowNodeState.completed;
             break;
           case TreeFlowNodeState.completed:
-            this.data[0][0].state = TreeFlowNodeState.disabled;
+            h.state = TreeFlowNodeState.disabled;
             break;
           case TreeFlowNodeState.disabled:
-            this.data[0][0].state = TreeFlowNodeState.enabled;
+            h.state = TreeFlowNodeState.enabled;
             break;
           case TreeFlowNodeState.enabled:
-            this.data[0][0].state = TreeFlowNodeState.error;
+            h.state = TreeFlowNodeState.error;
             break;
           case TreeFlowNodeState.error:
-            this.data[0][0].state = TreeFlowNodeState.default;
+            h.state = TreeFlowNodeState.default;
             break;
           case TreeFlowNodeState.default:
-            this.data[0][0].state = TreeFlowNodeState.active;
+            h.state = TreeFlowNodeState.active;
             break;
         }
       },

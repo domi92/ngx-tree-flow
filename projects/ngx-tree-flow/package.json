@@ -1,6 +1,12 @@
 {
   "name": "ngx-tree-flow",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.1",
+  "description": "Draw flow tree component",
+  "author": "domi92",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domi92/ngx-tree-flow"
+  },
   "peerDependencies": {
     "@angular/common": "^15.2.0",
     "@angular/core": "^15.2.0"
@@ -8,5 +14,12 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "tree-flow"
+  ],
+  "license": "MIT"
 }
