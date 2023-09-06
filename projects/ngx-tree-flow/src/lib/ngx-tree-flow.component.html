@@ -19,13 +19,13 @@
                 *ngIf="rowIndex != 0"
                 [class.line-color-default]="disableAutoLineColor"
                 [class]="{
-                        'line-default': node.state === states.default,
-                        'line-disabled': node.state === states.disabled,
-                        'line-enabled': node.state === states.enabled,
-                        'line-active': node.state === states.active,
-                        'line-completed': node.state === states.completed,
-                        'line-error': node.state === states.error,
-                       }"
+                  'line-default': node.state === states.default,
+                  'line-disabled': node.state === states.disabled,
+                  'line-enabled': node.state === states.enabled,
+                  'line-active': node.state === states.active,
+                  'line-completed': node.state === states.completed,
+                  'line-error': node.state === states.error
+                }"
                 [attr.x1]="design[rowIndex - 1][prev].dx + nodeRadius"
                 [attr.y1]="design[rowIndex - 1][prev].dy + nodeRadius"
                 [attr.x2]="node.dx + nodeRadius"
@@ -40,13 +40,13 @@
                 *ngIf="rowIndex != 0"
                 [class.line-color-default]="disableAutoLineColor"
                 [class]="{
-                        'line-default': node.state === states.default,
-                        'line-disabled': node.state === states.disabled,
-                        'line-enabled': node.state === states.enabled,
-                        'line-active': node.state === states.active,
-                        'line-completed': node.state === states.completed,
-                        'line-error': node.state === states.error,
-                       }"
+                  'line-default': node.state === states.default,
+                  'line-disabled': node.state === states.disabled,
+                  'line-enabled': node.state === states.enabled,
+                  'line-active': node.state === states.active,
+                  'line-completed': node.state === states.completed,
+                  'line-error': node.state === states.error
+                }"
                 [attr.x1]="design[rowIndex - 1][0].dx + nodeRadius"
                 [attr.y1]="design[rowIndex - 1][0].dy + nodeRadius"
                 [attr.x2]="node.dx + nodeRadius"
