@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.singleData.push({
       id: 1,
       label: 'Start',
-      state: TreeFlowNodeState.completed,
+      state: TreeFlowNodeState.default,
     });
 
     this.linearData.push({

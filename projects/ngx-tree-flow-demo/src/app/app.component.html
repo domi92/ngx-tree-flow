@@ -1,34 +1,28 @@
 <div style="display: flex; justify-content: space-evenly">
-  <div style="height: 48vh; width: 48vw; background-color: rgb(73, 73, 73); max-width: 620px">
+  <div style="height: 48vh; width: 33%; background-color: rgb(73, 73, 73)">
     <ngx-tree-flow
       maxWidth="300px"
       minWidth="300px"
-      [rotation]="0"
-      [viewboxWidth]="350"
-      [viewboxHeight]="420"
       [data]="data"
-      [levelSpacing]="60"
-      [useLabels]="true"
+      [levelSpacing]="80"
       [useEndingJoinNode]="false"
     ></ngx-tree-flow>
   </div>
-  <div style="height: 48vh; width: 48vw; background-color: rgb(73, 73, 73); max-width: 300px">
+  <div style="height: auto; width: 50%; background-color: rgb(60, 60, 120)">
     <ngx-tree-flow
       maxWidth="300px"
       minWidth="300px"
       [rotation]="0"
-      [viewboxWidth]="350"
-      [viewboxHeight]="420"
       [data]="linearData"
       [levelSpacing]="60"
       [useEndingJoinNode]="false"
     ></ngx-tree-flow>
   </div>
-  <div style="height: 48vh; width: 48vw; background-color: rgb(73, 73, 73); max-width: 300px">
+  <div style="height: 48vh; width: auto; background-color: rgb(73, 73, 73)">
     <ngx-tree-flow
+      maxWidth="300px"
+      minWidth="300px"
       [rotation]="0"
-      [viewboxWidth]="350"
-      [viewboxHeight]="420"
       [data]="singleData"
       [levelSpacing]="60"
       [useEndingJoinNode]="false"
@@ -40,7 +34,7 @@
     <ngx-tree-flow
       [rotation]="0"
       maxWidth="300px"
-      minWidth="300px"
+      minWidth="600px"
       [viewboxWidth]="350"
       [viewboxHeight]="500"
       [data]="data"
@@ -50,7 +44,7 @@
       [disableAutoLineColor]="true"
     ></ngx-tree-flow>
   </div>
-  <div style="height: 48vh; width: 48vw; background-color: rgb(15, 15, 15); max-width: 300px">
+  <div style="height: 48vh; width: 48vw; background-color: rgb(60, 60, 120); max-width: 300px">
     <ngx-tree-flow
       [rotation]="0"
       maxWidth="300px"
@@ -63,5 +57,9 @@
       [hideLinearModelLabel]="true"
       [disableAutoLineColor]="true"
     ></ngx-tree-flow>
+  </div>
+  <!-- this one has not dimension fixed and will be adapted to parent dimension -->
+  <div style="height: 48vh; width: auto; background-color: rgb(73, 73, 73)">
+    <ngx-tree-flow [rotation]="0" [data]="singleData" [levelSpacing]="60" [useEndingJoinNode]="false"></ngx-tree-flow>
   </div>
 </div>
