@@ -1,34 +1,26 @@
+# ngx-tree-flow
+* This Angular component allows to create svg images of a schematic tree workflow. Each step is displayed as a node with a name and a state.
+* With node state is possible to automatically change colors of schema and return to the user visual information of current step processed or in error state.
+* Component allows to identify nodes by number or by single char name and display multiple nodes on the same level.
+* Oter customization are possible and described below
+
+# Installation
+Install from npm:
+
+npm i ngx-tree-flow --save .
+
+import NgxTreeFlowModule in your app.module.ts:
+```typescript
+import { NgxTreeFlowModule } from 'ngx-tree-flow.module';
+
+@NgModule({
+  declarations: [App],
+  bootstrap: [App],
+  imports: [NgxTreeFlowModule],
+})
+export class AppModule {}
+```
 # Example
-Component can be customized with different state colors, to use a dynamic or static line colors.
+* Generic example of some possible output
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/d5189481-5454-43c6-a6e3-78caa44ed692" width=65%/>
 
-Some example of final draw result.
-
-<img src="https://raw.githubusercontent.com/domi92/ngx-tree-flow/master/.github/example.jpg" width=65%/>
-
-# NgxTreeFlow
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
