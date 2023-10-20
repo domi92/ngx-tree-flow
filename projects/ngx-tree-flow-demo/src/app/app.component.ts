@@ -13,7 +13,15 @@ export class AppComponent implements OnInit {
 
   protected linearData: TreeFlowNode[] = [];
 
+  protected singleData: TreeFlowNode[] = [];
+
   ngOnInit(): void {
+    this.singleData.push({
+      id: 1,
+      label: 'Start',
+      state: TreeFlowNodeState.completed,
+    });
+
     this.linearData.push({
       id: 1,
       label: 'Start',

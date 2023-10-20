@@ -12,6 +12,12 @@ export class NgxTreeFlowComponent implements OnInit {
   @Input('data')
   data: TreeFlowNode[][] | TreeFlowNode[] = [];
 
+  @Input('maxWidth')
+  maxWidth: string | undefined = undefined;
+
+  @Input('minWidth')
+  minWidth: string | undefined = undefined;
+
   @Input('viewboxWidth')
   viewboxWidth = 500;
 
