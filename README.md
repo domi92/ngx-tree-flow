@@ -168,7 +168,7 @@ export class AppComponent implements OnInit {
 * Hide start and ending joining nodes
 * **@Input('useStartingJoinNode')** and **@Input('useEndingJoinNode')**
 
-# Dimension and sizes
+# Dimension and sizes svg elements
 *   **@Input('levelSpacing')**
 *   **@Input('nodeRadius')** **@Input('nodeStrokeWidth')**  Node radius and border dimension 
 
@@ -203,4 +203,50 @@ export class AppComponent implements OnInit {
 ```
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/3b29f2d6-00a4-4326-b9dd-8669f9c3a23f" width=30%/>
 
+# Height and width component
+Component is based on SVG. It is using a viewbox that can be customized with **@Input('viewboxWidth')** (default 500) and **@Input('viewboxHeight')** (default adapted dynamically)
 
+Increasing the size of viewbox, without change node radius will generate a diagram with smaller dimensions. On the other side decreasing viewobx and lead to bigger node dimensions but also to face disaplying error (node displayed outside the visible part of component)
+
+* Svg size is automatically adjusted to container size by deafult. That means we need to fix dimensions for parents or we can use 2 other input property
+
+  **@Input('maxWidth')** and **Input('minWidth')**
+
+```typescript
+<div style="display: flex; justify-content: space-evenly">
+   <div style="height: 48vh; width: 33%; background-color: rgb(73, 73, 73)">
+    <ngx-tree-flow
+      maxWidth="300px"
+      minWidth="300px"
+      [data]="data"
+      [levelSpacing]="80"
+      [useEndingJoinNode]="false"
+    ></ngx-tree-flow>
+  </div>
+  <div style="height: 48vh; width: 50%; background-color: rgb(60, 60, 120)">
+    <ngx-tree-flow
+      maxWidth="300px"
+      minWidth="300px"
+      [rotation]="0"
+      [data]="linearData"
+      [levelSpacing]="60"
+      [useEndingJoinNode]="false"
+    ></ngx-tree-flow>
+  </div>
+  <div style="height: 48vh; width: auto; background-color: rgb(73, 73, 73)">
+    <ngx-tree-flow
+      [rotation]="0"
+      [data]="singleData"
+      [levelSpacing]="60"
+      [useEndingJoinNode]="false"
+    ></ngx-tree-flow>
+  </div>
+</div>
+```
+Last one has not defined any dimension for the parent then with is stretched to fill parent (nodes are bigger). If screen size is reduced and parent width is smaller node can appera so litte to be not visible
+
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/4cfc313f-50ea-49e4-ad0d-6a9c4309b3fb" width=80%/>
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/368cad4f-994f-4818-874a-edba173b4910" width=45%/>
+
+To prevent this auto adjust dimension all parent component should have same dimensions plus we can use the **minWidth="300px"** property to ensure all component in the same page will be displayed equally
+ 
