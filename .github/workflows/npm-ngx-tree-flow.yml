@@ -23,9 +23,16 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run github-package
+        
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          tag: latest
+          token: ${{ secrets.NPM }}
+          strategy: upgrade
 
-      - name: publish
-        run: npm publish --access public --tag latest --dry-run
-        #working-directory: my-package
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM}}
+          
+      #- name: publish
+      #  run: npm publish --access public --tag latest --dry-run
+      #  -strategy: upgrade
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{secrets.NPM}}
