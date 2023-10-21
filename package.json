@@ -14,7 +14,6 @@
     "package": "npm run build_lib && npm run copy_files && npm run npm_pack",
     "github-package": "ng build ngx-tree-flow && npm pack"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^15.2.0",
     "@angular/common": "^15.2.0",
