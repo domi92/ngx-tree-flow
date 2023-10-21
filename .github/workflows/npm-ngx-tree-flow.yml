@@ -22,10 +22,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run build
+        run: npm run package
 
       - name: publish
         run: npm publish --access public
-        working-directory: my-package
+        #working-directory: my-package
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}
