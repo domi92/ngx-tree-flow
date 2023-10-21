@@ -25,7 +25,7 @@ jobs:
         run: npm run github-package
 
       - name: publish
-        run: npm publish --access public
+        run: npm publish --access public --tag latest --dry-run
         #working-directory: my-package
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}
