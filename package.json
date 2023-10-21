@@ -7,11 +7,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build_lib": "ng build ngx-tree-flow ",
+    "build_lib": "ng build ngx-tree-flow",
     "copy_license": "copy .\\LICENSE .\\dist\\ngx-tree-flow",
     "copy_files": "npm run copy_license",
     "npm_pack": "cd dist/ngx-tree-flow && npm pack",
-    "package": "npm run build_lib && npm run copy_files && npm run npm_pack"
+    "package": "npm run build_lib && npm run copy_files && npm run npm_pack",
+    "github-package": "ng build ngx-tree-flow && npm pack"
   },
   "private": true,
   "dependencies": {

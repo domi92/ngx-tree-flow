@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run package
+        run: npm run github-package
 
       - name: publish
         run: npm publish --access public
