@@ -33,10 +33,10 @@ jobs:
 
       - uses: JS-DevTools/npm-publish@v3
         id: publish
-        name: publish to NPM
+        name: Publish to NPM
         with:
           token: ${{ secrets.NPM }}
-          strategy: upgrade
+          #strategy: upgrade
           dry-run: true
 
         ## MANUL RUN
