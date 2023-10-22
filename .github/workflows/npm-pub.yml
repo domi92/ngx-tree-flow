@@ -36,7 +36,7 @@ jobs:
         name: Publish to NPM
         with:
           token: ${{ secrets.NPM }}
-          #strategy: upgrade
+          strategy: upgrade
           dry-run: true
 
         ## MANUL RUN
