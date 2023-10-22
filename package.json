@@ -13,7 +13,7 @@
     "npm_pack": "cd dist/ngx-tree-flow && npm pack",
     "package": "npm run build_lib && npm run copy_files && npm run npm_pack",
     "git_copy_files": "cp LICENSE dist/",
-    "github-package": "ng build ngx-tree-flow && npm run git_copy_files && npm pack"
+    "github-package": "ng build ngx-tree-flow && npm run git_copy_files && npm run npm_pack"
   },
   "dependencies": {
     "@angular/animations": "^15.2.0",
