@@ -1,8 +1,9 @@
 name: 'publish npm'
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
@@ -23,14 +24,8 @@ jobs:
       - name: Build
         run: npm run github-package
 
-      - uses: JS-DevTools/npm-publish@v3
-        with:
-          dry-run: true
-          tag: latest
-          token: ${{ secrets.NPM }}
-          strategy: upgrade
-
-      #  run: npm publish --access public --tag latest --dry-run
-      #  -strategy: upgrade
-      #  env:
-      #    NODE_AUTH_TOKEN: ${{secrets.NPM}}
+        
+      - name: Publish to npm
+        run: npm publish --access public --tag latest --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM}}
