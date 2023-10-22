@@ -22,7 +22,10 @@ Run `ng build ngx-tree-flow` to build the project. The build artifacts will be s
 
 ## Publishing
 
-After building your library with `ng build ngx-tree-flow`, go to the dist folder `cd dist/ngx-tree-flow` and run `npm publish`.
+change version in package.json
+
+Run `npm publish --access public --tag beta"`
+Run `npm publish`
 
 ## Running unit tests
 

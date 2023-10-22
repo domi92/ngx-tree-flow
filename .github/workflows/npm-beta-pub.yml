@@ -25,6 +25,6 @@ jobs:
         run: npm run github-package
 
       - name: Publish to NPM
-        run: npm publish --tag beta
+        run: npm publish --tag beta --dry-run
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}
