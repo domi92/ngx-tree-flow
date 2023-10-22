@@ -1,9 +1,8 @@
 name: 'publish npm'
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   build-and-deploy:
@@ -15,7 +14,7 @@ jobs:
       - name: Set up node.js
         uses: actions/setup-node@v3.3.0
         with:
-          node-version: '16'
+          node-version: '20.x'
           cache: 'npm'
           registry-url: https://registry.npmjs.org
 
@@ -23,7 +22,10 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run github-package
-        
+      
+      - name: NPM publish
+      
+      
       - uses: JS-DevTools/npm-publish@v3
         with:
           dry-run: true
@@ -31,8 +33,6 @@ jobs:
           token: ${{ secrets.NPM }}
           strategy: upgrade
 
-          
-      #- name: publish
       #  run: npm publish --access public --tag latest --dry-run
       #  -strategy: upgrade
       #  env:
