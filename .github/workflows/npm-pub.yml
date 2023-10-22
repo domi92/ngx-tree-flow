@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       foo:
-        default: "false"
+        default: false
         description: Example optional boolean input without `default` property.
         required: false
         type: boolean
@@ -31,7 +31,6 @@ jobs:
       - name: Build
         run: npm run github-package
 
-        
       - name: Publish to npm
         run: npm publish --access public --tag latest --dry-run
         env:
