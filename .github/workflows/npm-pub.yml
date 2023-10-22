@@ -30,14 +30,14 @@ jobs:
       - name: Build
         run: npm run github-package
 
-      - uses: JS-DevTools/npm-publish@v3
-        id: publish
-        name: Publish to NPM
-        with:
-          token: ${{ secrets.NPM }}
-          strategy: upgrade
+      # - uses: JS-DevTools/npm-publish@v3
+      #   id: publish
+      #   name: Publish to NPM
+      #   with:
+      #     token: ${{ secrets.NPM }}
+      #     strategy: upgrade
 
-        ## MANUL RUN
-        # run: npm publish  --dry-run
-        # env:
-        #   NODE_AUTH_TOKEN: ${{secrets.NPM}}
+      - name: Publish to NPM
+        run: npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM}}
