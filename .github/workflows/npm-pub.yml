@@ -1,6 +1,13 @@
 name: 'publish npm'
 
 on:
+  workflow_dispatch:
+    inputs:
+      foo:
+        default: "false"
+        description: Example optional boolean input without `default` property.
+        required: false
+        type: boolean
   push:
     branches:
       - main
