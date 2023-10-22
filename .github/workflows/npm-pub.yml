@@ -8,9 +8,8 @@ on:
         description: Example optional boolean input without `default` property.
         required: false
         type: boolean
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   build-and-deploy:
