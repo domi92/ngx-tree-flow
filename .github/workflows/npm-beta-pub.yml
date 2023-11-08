@@ -43,7 +43,18 @@ jobs:
 
       - run: ls
 
-      - name: list dist folder
+      - name: List dist folder
         run: |
           cd dist/
           ls
+
+      - name: List ngx-tree-flow folder
+        run: |
+          cd ngx-tree-flow/
+          ls
+
+      - name: Publish to NPM
+        working-directory: dist/ngx-tree-flow
+        run: npm publish --tag beta --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM}}1
