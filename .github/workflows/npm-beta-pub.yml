@@ -31,13 +31,11 @@ jobs:
       - name: Build
         run: npm run github-package
 
-      - name: Tar files
-        run: tar -cvf pck.tar dist/
-
       - uses: actions/upload-artifact@v3
         with:
-          name: pck-artifact
-          path: pck.tar
+          name: pck
+          path: dist
+          retention-days: 3
 
       - run: ls
 
