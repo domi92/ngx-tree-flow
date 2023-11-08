@@ -41,20 +41,20 @@ jobs:
           name: app-build
           path: dist
 
-      - run: ls
+      - run: ll
 
       - name: List dist folder
         run: |
-          cd dist
+          cd dist/
           ll
 
       - name: List ngx-tree-flow folder
         run: |
-          cd ngx-tree-flow
+          cd dist/ngx-tree-flow/
           ll
 
       - name: Publish to NPM
-        working-directory: dist/ngx-tree-flow
+        working-directory: dist/ngx-tree-flow/
         run: npm publish --tag beta --dry-run
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}1
