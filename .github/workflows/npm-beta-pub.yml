@@ -1,6 +1,13 @@
 name: 'publish npm'
 
 on:
+  workflow_dispatch:
+    inputs:
+      foo:
+        default: false
+        description: manual run.
+        required: false
+        type: boolean
   push:
     branches:
       - main
@@ -28,3 +35,15 @@ jobs:
         run: npm publish --tag beta --dry-run
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: dist
+
+      - run: ls
+
+      - name: list dist folder
+        run: |
+          cd dist/
+          ls
