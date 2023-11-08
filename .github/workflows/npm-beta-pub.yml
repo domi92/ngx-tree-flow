@@ -41,17 +41,17 @@ jobs:
           name: app-build
           path: dist
 
-      - run: ll
+      - run: ls
 
       - name: List dist folder
         run: |
           cd dist/
-          ll
+          ls
 
       - name: List ngx-tree-flow folder
         run: |
           cd dist/ngx-tree-flow/
-          ll
+          ls
 
       - name: Publish to NPM
         working-directory: dist/ngx-tree-flow/
