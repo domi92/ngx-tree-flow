@@ -45,13 +45,13 @@ jobs:
 
       - name: List dist folder
         run: |
-          cd dist/
-          ls
+          cd dist
+          ll
 
       - name: List ngx-tree-flow folder
         run: |
-          cd ngx-tree-flow/
-          ls
+          cd ngx-tree-flow
+          ll
 
       - name: Publish to NPM
         working-directory: dist/ngx-tree-flow
