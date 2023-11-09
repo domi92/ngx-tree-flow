@@ -1,11 +1,11 @@
 name: 'Branch - test working action [dry-run]'
 
 on:
+  workflow_dispatch:
+  
   push:
     branches-ignore:
       - main
-      
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
