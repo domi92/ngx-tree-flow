@@ -6,12 +6,6 @@ on:
       - main
       
   workflow_dispatch:
-    inputs:
-      foo:
-        default: false
-        description: manual run.
-        required: false
-        type: boolean
 
 jobs:
   build-and-deploy:
