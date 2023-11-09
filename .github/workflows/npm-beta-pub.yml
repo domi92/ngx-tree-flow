@@ -1,13 +1,7 @@
-name: 'Beta publish npm'
+name: 'NPM publish beta'
 
 on:
   workflow_dispatch:
-    inputs:
-      foo:
-        default: false
-        description: manual run.
-        required: false
-        type: boolean
   push:
     branches:
       - main
@@ -28,6 +22,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
       - name: Build
         run: npm run github-package
 
@@ -35,22 +30,10 @@ jobs:
         with:
           name: pck
           path: dist
-          retention-days: 3
-
-      - run: ls
-
-      - name: List dist folder
-        run: |
-          cd dist/
-          ls
-
-      - name: List ngx-tree-flow folder
-        run: |
-          cd dist/ngx-tree-flow/
-          ls
+          retention-days: 2
 
       - name: Publish to NPM
         working-directory: dist/ngx-tree-flow/
-        run: npm publish --tag beta --dry-run
+        run: npm publish --tag beta
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM}}1
+          NODE_AUTH_TOKEN: ${{secrets.NPM}}

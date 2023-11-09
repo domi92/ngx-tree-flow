@@ -1,13 +1,7 @@
-name: 'publish npm'
+name: 'NPM publish'
 
 on:
   workflow_dispatch:
-    inputs:
-      foo:
-        default: false
-        description: Example optional boolean input without `default` property.
-        required: false
-        type: boolean
   release:
     types: [published]
 
@@ -27,17 +21,18 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
       - name: Build
         run: npm run github-package
 
-      # - uses: JS-DevTools/npm-publish@v3
-      #   id: publish
-      #   name: Publish to NPM
-      #   with:
-      #     token: ${{ secrets.NPM }}
-      #     strategy: upgrade
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pck
+          path: dist
+          retention-days: 2
 
       - name: Publish to NPM
+        working-directory: dist/ngx-tree-flow/
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}
