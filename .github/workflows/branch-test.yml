@@ -32,7 +32,7 @@ jobs:
           path: dist
           retention-days: 0
 
-      - name: Publish to NPM
+      - name: Publish to NPM [DRY-RUN]
         working-directory: dist/ngx-tree-flow/
         run: npm publish --tag beta --dry-run
         env:
