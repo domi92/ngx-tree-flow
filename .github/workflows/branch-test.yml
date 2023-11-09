@@ -3,10 +3,6 @@ name: 'Branch - test working action [dry-run]'
 on:
   workflow_dispatch:
   
-  push:
-    branches-ignore:
-      - main
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
