@@ -1,0 +1,46 @@
+name: 'Branch - test working action [dry-run]'
+
+on:
+  push:
+    branches-ignore:
+      - main
+      
+  workflow_dispatch:
+    inputs:
+      foo:
+        default: false
+        description: manual run.
+        required: false
+        type: boolean
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run github-package
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: pck
+          path: dist
+          retention-days: 0
+
+      - name: Publish to NPM
+        working-directory: dist/ngx-tree-flow/
+        run: npm publish --tag beta --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM}}1
