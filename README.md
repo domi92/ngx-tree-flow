@@ -21,15 +21,17 @@ import { NgxTreeFlowModule } from 'ngx-tree-flow';
 export class AppModule {}
 ```
 # Example
-* Generic example of some possible output result
+* Generic example of some possible output results
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/d5189481-5454-43c6-a6e3-78caa44ed692" width=65%/>
 
 # Usage
-* import from package
+* import into your component
 ```typescript
 import { TreeFlowNode, TreeFlowNodeState } from 'ngx-tree-flow';
 ```
-* single node
+- TreeFlowNode: is the basic node object
+- TreeFlowNodeState: is used to change state of single node. When status change colors are applied to make state visible
+* SINGLE NODE CREATION
 ```typescript
 @Component({
  template: `
@@ -50,15 +52,23 @@ export class AppComponent implements OnInit {
   }
 }
 ```
+Labels are dispalyed only when displayed tree is linear (simple data array is used)
+
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/b4b0e4f4-d185-46da-a555-c89a7570d19e" width=20%/>
 
 *  **@Input('hideLinearModelLabel')** use [hideLinearModelLabel]="true" to hide text label
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/52f499be-eb5d-4632-b8eb-1d2b34102e54" width=20%/>
 
 * **@Input('useLabels')** [useLabels]="true" display label inside node
-* **@Input('nodeRadius')** default is 14 change to fit label size in it [nodeRadius]="22"
+* **@Input('nodeRadius')** can be used to increase node radius dimension (default 14)
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/6554d00f-9c07-4868-8b84-eed3c9333a42" width=20%/>
 
+# Rotation
+
+* **@Input('rotation')** [rotation]="90". Insert degree to rotate image. 90 flip horizontally. Any other degree can be used (75 in  third image exampe). Rotation can be used to animate diagram
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/7527f093-6b73-42ba-b4bc-bbb71807aded" width=30%/>
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/00877e18-4985-487d-9694-a4345f395126" width=30%/>
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/82aba907-40f9-46cc-a754-f4ce66a9864e" width=30%/>
 
 # Customize color states
 States are defined as follow
@@ -72,10 +82,6 @@ export declare enum TreeFlowNodeState {
     error = 5
 }
 ```
-* **@Input('rotation')** [rotation]="90". Insert degree to rotate image. 90 flip horizontally. Any other degree can be used (75 in  third image exampe). Rotation can be used to animate diagram
-<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/7527f093-6b73-42ba-b4bc-bbb71807aded" width=30%/>
-<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/00877e18-4985-487d-9694-a4345f395126" width=30%/>
-<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/82aba907-40f9-46cc-a754-f4ce66a9864e" width=30%/>
 
 * **@Input('disableAutoLineColor')** [disableAutoLineColor]="true". Can be used to force schema lines not to change color based on nex node state.
 
@@ -128,8 +134,8 @@ export declare enum TreeFlowNodeState {
 ```
 
 
-# Multiple nodes at same level
-Use and array of array. First external one is a level and internal array is the 
+# Tree view. Multiple nodes at same level (data is array of arrays)
+Change data type to and array of arrays. First external one is a level and internal defines nodes for each level
 ```typescript
 @Component({
   selector: 'app-root',
