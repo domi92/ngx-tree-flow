@@ -85,22 +85,20 @@ export declare enum TreeFlowNodeState {
 
 * **@Input('disableAutoLineColor')** [disableAutoLineColor]="true". Can be used to force schema lines not to change color based on nex node state.
 
-* syle colors:
+* style colors:
 
   default colors are defined in variables that can be overriden in local component's style 
 
 ```css
-* {
   /*error*/
   --ngx-tree-flow-fill-color-node-error: grey !important;
   --ngx-tree-flow-stroke-color-node-error: red !important;
   --ngx-tree-flow-text-color-error: darkred !important;
-}
 ```
 
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/e9c5d41b-6948-4e8c-8788-8a84b5555796" width=40%/>
 
-* Complete list of color variables to customize:
+* Complete list of variables that can be customized:
   
 ```css
    --ngx-tree-flow-background: #121212;
@@ -135,7 +133,7 @@ export declare enum TreeFlowNodeState {
 
 
 # Tree view. Multiple nodes at same level (data is array of arrays)
-Change data type to and array of arrays. First external one is a level and internal defines nodes for each level
+Change data type to and array of arrays. First array is the level and internal one defines nodes for each level
 ```typescript
 @Component({
   selector: 'app-root',
@@ -175,22 +173,22 @@ export class AppComponent implements OnInit {
 * **@Input('useStartingJoinNode')** and **@Input('useEndingJoinNode')**
 
 # Dimension and sizes svg elements
-*   **@Input('levelSpacing')**
-*   **@Input('nodeRadius')** **@Input('nodeStrokeWidth')**  Node radius and border dimension 
 
-  Default dimension are 14 and 2
+Default behavior is to not fit svg to parent container. This allows to use a scroll view in parent and scroll the tree if is bigger than parent
+
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/bc426c2b-df30-42cb-8372-2bc925143fa7" width=30%/>
+
+*   **@Input('fitParent')**  set it to true to auto fit svg to parent container. Note that if svg is too big all nodes will be scaled and shrinked down.
+
+   In order to limit this effect other input parameter can be used to adjust dimension of tree image.
+
+*   **@Input('levelSpacing')** distance between levels, can be used to increase vertical space and adjust aspect when also node radius is changed to make nodes bigger (Default dimension is 65)
+*   **@Input('nodeRadius')** **@Input('nodeStrokeWidth')**  Cusotmize node radius and border dimension (Default dimension are 14 and 2)
   
-*   **@Input('nodeJoinRadius')** **@Input('nodeJoinStrokeWidth')**  Node radius and border dimension for joining node 
+*   **@Input('nodeJoinRadius')** **@Input('nodeJoinStrokeWidth')**  Node radius and border dimension for joining node between layers with multiple nodes (Default dimension are 8 and 2)
 
-  Default dimension are 8 and 2
+* **@Input('lineStrokeWidth')** Line width connecting nodes (Default dimension is 2)
 
-* **@Input('lineStrokeWidth')** Line with connecting nodes
-
-  Default dimension is 2
-
-* **@Input('levelSpacing')** space between one level and the next one
-
-  Default dimension is 65
   
 ```typescript
  <ngx-tree-flow
@@ -212,11 +210,13 @@ export class AppComponent implements OnInit {
 # Height and width component
 Component is based on SVG. It is using a viewbox that can be customized with **@Input('viewboxWidth')** (default 500) and **@Input('viewboxHeight')** (default adapted dynamically)
 
-Increasing the size of viewbox, without change node radius will generate a diagram with smaller dimensions. On the other side decreasing viewobx and lead to bigger node dimensions but also to face disaplying error (node displayed outside the visible part of component)
+Increasing the size of viewbox, without change node radius will generate a diagram with smaller dimensions. On the other side decreasing viewobx will lead to bigger node dimensions but also to face disaplying error (node displayed outside the visible part of component)
 
 * Svg size is automatically adjusted to container size by deafult. That means we need to fix dimensions for parents or we can use 2 other input property
 
   **@Input('maxWidth')** and **Input('minWidth')**
+
+If dimension are fixed in this way, svg is adapted to this dimension and will stay fixed also when window dimensions change- Like this tree dimension will stay uniform and are not based on parend dimension
 
 ```typescript
 <div style="display: flex; justify-content: space-evenly">
@@ -249,7 +249,7 @@ Increasing the size of viewbox, without change node radius will generate a diagr
   </div>
 </div>
 ```
-Last one has not defined any dimension for the parent then with is stretched to fill parent (nodes are bigger). If screen size is reduced and parent width is smaller node can appera so litte to be not visible
+Last one has not defined any dimension for the parent then with is stretched to fill parent (nodes are bigger). If screen size is reduced and parent width is smaller node can be displayed so smalller to be not visible
 
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/4cfc313f-50ea-49e4-ad0d-6a9c4309b3fb" width=80%/>
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/368cad4f-994f-4818-874a-edba173b4910" width=45%/>
