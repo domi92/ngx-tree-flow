@@ -10,6 +10,7 @@ import { interval } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   protected data: TreeFlowNode[][] = [];
+  protected scrollingData: TreeFlowNode[][] = [];
 
   protected linearData: TreeFlowNode[] = [];
 
@@ -89,6 +90,15 @@ export class AppComponent implements OnInit {
     this.data.push([d, e]);
     this.data.push([f, g, h]);
     // this.data.push([e]);
+    this.scrollingData = [...this.data];
+
+    this.scrollingData.push([a]);
+    this.scrollingData.push([a]);
+    this.scrollingData.push([a]);
+    this.scrollingData.push([a]);
+    this.scrollingData.push([a]);
+    this.scrollingData.push([a]);
+    this.scrollingData.push([a]);
 
     const source = interval(1000);
 

@@ -1,3 +1,26 @@
+
+<div style="display: flex;">
+  <div style="height: 48vh; width: 50%; background-color: rgb(73, 73, 73); overflow: auto;">
+    <ngx-tree-flow
+
+    maxWidth="300px"
+    minWidth="300px"
+      [data]="scrollingData"
+      [nodeRadius]="22"
+      [levelSpacing]="80"
+      [useEndingJoinNode]="false"
+    ></ngx-tree-flow>
+  </div>
+  <div style="height: 48vh; width: 50%; background-color: rgb(60, 60, 120); overflow: auto;">
+    <ngx-tree-flow
+      [data]="scrollingData"
+      [useEndingJoinNode]="false"
+      [nodeRadius]="22"
+      [levelSpacing]="80"
+      [fitParent]="true"
+    ></ngx-tree-flow>
+  </div>
+</div>
 <div style="display: flex; justify-content: space-evenly">
   <div style="height: 48vh; width: 33%; background-color: rgb(73, 73, 73)">
     <ngx-tree-flow
@@ -6,13 +29,13 @@
       [data]="data"
       [levelSpacing]="80"
       [useEndingJoinNode]="false"
+      [fitParent]="true"
     ></ngx-tree-flow>
   </div>
   <div style="height: auto; width: 50%; background-color: rgb(60, 60, 120)">
     <ngx-tree-flow
-      maxWidth="300px"
-      minWidth="300px"
       [rotation]="0"
+      [nodeRadius]="22"
       [data]="linearData"
       [levelSpacing]="60"
       [useEndingJoinNode]="false"
@@ -23,6 +46,7 @@
       maxWidth="300px"
       minWidth="300px"
       [rotation]="0"
+      [nodeRadius]="22"
       [data]="singleData"
       [levelSpacing]="60"
       [useEndingJoinNode]="false"
@@ -42,6 +66,7 @@
       [levelSpacing]="66"
       [useEndingJoinNode]="true"
       [disableAutoLineColor]="true"
+      [fitParent]="true"
     ></ngx-tree-flow>
   </div>
   <div style="height: 48vh; width: 48vw; background-color: rgb(60, 60, 120); max-width: 300px">
@@ -56,10 +81,27 @@
       [useEndingJoinNode]="false"
       [hideLinearModelLabel]="true"
       [disableAutoLineColor]="true"
+      [fitParent]="true"
     ></ngx-tree-flow>
   </div>
   <!-- this one has not dimension fixed and will be adapted to parent dimension -->
   <div style="height: 48vh; width: auto; background-color: rgb(73, 73, 73)">
-    <ngx-tree-flow [rotation]="0" [data]="singleData" [levelSpacing]="60" [useEndingJoinNode]="false"></ngx-tree-flow>
+    <ngx-tree-flow [fitParent]="true" [rotation]="0" [data]="singleData"></ngx-tree-flow>
   </div>
 </div>
+<!-- todo fix with some orizontall scrolling. svg image exit viewbox, must be reshaped
+<div style="height: 48vh; width: 48vw; background-color: rgb(15, 15, 15); overflow: auto;">
+  <ngx-tree-flow
+    [data]="scrollingData"
+    [rotation]="0"
+    maxWidth="300px"
+    minWidth="600px"
+    [viewboxWidth]="350"
+    [viewboxHeight]="500"
+    [rotation]="90"
+    [levelSpacing]="66"
+    [useEndingJoinNode]="true"
+    [disableAutoLineColor]="true"
+    [fitParent]="true"
+  ></ngx-tree-flow>
+</div> -->
