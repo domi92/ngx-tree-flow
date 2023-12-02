@@ -1,7 +1,4 @@
-<div
-  style="width: 100%; display: flex; justify-content: center"
-  [class.fit]="fitParent"
->
+<div style="width: 100%; display: flex; justify-content: center" [class.fit]="fitParent">
   <div
     [ngStyle]="{
       'max-width': maxWidth ?? 'auto',
@@ -18,18 +15,11 @@
       version="1.1"
     >
       <?xml -stylesheet=-stylesheet type="text/css" href="ngx-tree-flow.component.scss" ?>
-      <g
-        [attr.transform]="
-          isLinear && !hideLinearModelLabel
-            ? 'translate(-' + (viewboxWidth * 1) / 4 + ',0)'
-            : ''
-        "
-      >
+
+      <!-- <rect *ngIf="layoutAlign" width="100%" height="100%" style="stroke: red; stroke-width: 5" /> -->
+      <g [attr.transform]="isLinear && !hideLinearModelLabel ? 'translate(-' + (viewboxWidth * 1) / 4 + ',0)' : ''">
         <!-- connection lines -->
-        <g
-          *ngFor="let row of design; let rowIndex = index"
-          [attr.transform]="verticalAlignTranslate"
-        >
+        <g *ngFor="let row of design; let rowIndex = index" [attr.transform]="verticalAlignTranslate">
           <g *ngFor="let node of row; let nodeIndex = index">
             <!-- if is a join node we need to link all upper nodes -->
             <g *ngIf="node.isJoinNode">
@@ -39,11 +29,10 @@
                   [class.line-color-default]="disableAutoLineColor"
                   [class]="{
                     'line-default': node.state === states.default,
-                    'line-disabled': node.state === states.disabled,
+                    'line-disabled': node.state === states.disabled || node.state === states.error,
                     'line-enabled': node.state === states.enabled,
                     'line-active': node.state === states.active,
-                    'line-completed': node.state === states.completed,
-                    'line-error': node.state === states.error
+                    'line-completed': node.state === states.completed
                   }"
                   [attr.x1]="design[rowIndex - 1][prev].dx + nodeRadius"
                   [attr.y1]="design[rowIndex - 1][prev].dy + nodeRadius"
@@ -164,7 +153,7 @@
                     text-anchor="start"
                   >
                     <tspan class="linearLabel" y="50%" x="10%">
-                      {{ node.label ?? "" }}
+                      {{ node.label ?? '' }}
                     </tspan>
                   </text>
                 </svg>
