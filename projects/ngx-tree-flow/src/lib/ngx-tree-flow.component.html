@@ -66,7 +66,10 @@
           </g>
         </g>
         <!-- nodes -->
-        <g *ngFor="let row of design; let rowIndex = index" [attr.transform]="verticalAlignTranslate">
+        <g
+          *ngFor="let row of design; let rowIndex = index"
+          [attr.transform]="verticalAlignTranslate"
+        >
           <g *ngFor="let node of row; let nodeIndex = index">
             <g>
               <g *ngIf="node.isJoinNode">
@@ -83,7 +86,12 @@
                   [class.node-completed]="node.state === states.completed"
                   [class.node-error]="node.state === states.error"
                 >
-                  <circle cx="50%" cy="50%" [attr.r]="nodeJoinRadius" [attr.stroke-width]="nodeJoinStrokeWidth" />
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    [attr.r]="nodeJoinRadius"
+                    [attr.stroke-width]="nodeJoinStrokeWidth"
+                  />
                 </svg>
               </g>
               <g *ngIf="!node.isJoinNode">
@@ -100,7 +108,12 @@
                   [class.node-completed]="node.state === states.completed"
                   [class.node-error]="node.state === states.error"
                 >
-                  <circle cx="50%" cy="50%" [attr.r]="nodeRadius" [attr.stroke-width]="nodeStrokeWidth" />
+                  <circle
+                    cx="50%"
+                    cy="50%"
+                    [attr.r]="nodeRadius"
+                    [attr.stroke-width]="nodeStrokeWidth"
+                  />
                   <text
                     *ngIf="useLabels"
                     transform-origin="center"
@@ -108,7 +121,7 @@
                     dominant-baseline="central "
                     text-anchor="middle"
                   >
-                    <tspan y="50%" x="50%">{{ node.label ?? '' }}</tspan>
+                    <tspan y="50%" x="50%">{{ node.label ?? "" }}</tspan>
                   </text>
                   <text
                     *ngIf="!useLabels"
