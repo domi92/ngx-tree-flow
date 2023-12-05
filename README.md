@@ -180,6 +180,11 @@ Default behavior is to not fit svg to parent container. This allows to use a scr
 
 *   **@Input('fitParent')**  set it to true to auto fit svg to parent container. Note that if svg is too big all nodes will be scaled and shrinked down.
 
+
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/bcbfa43e-c563-4e69-bfde-00581ab9c254" width=30%/>
+
+*   **@Input('horizontalAlign')** : 'start' | 'center' | 'end' = 'center'  change this input to horizontal align component into parent 
+
    In order to limit this effect other input parameter can be used to adjust dimension of tree image.
 
 *   **@Input('levelSpacing')** distance between levels, can be used to increase vertical space and adjust aspect when also node radius is changed to make nodes bigger (Default dimension is 65)
