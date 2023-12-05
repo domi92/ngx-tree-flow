@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, DoCheck, ElementRef, HostBinding, Input, KeyValueDiffers, OnInit, ViewChild } from '@angular/core';
 import { TreeFlowNodeState } from './resource/TreeFlowNodeState';
 import { TreeFlowNode } from './resource/TreeFlowNode';
 import { DesignTreeFlowNode } from './resource/DesignTreeFlowNode';
@@ -9,12 +9,14 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   templateUrl: './ngx-tree-flow.component.html',
   styleUrls: ['./ngx-tree-flow.component.scss'],
 })
-export class NgxTreeFlowComponent implements OnInit {
+export class NgxTreeFlowComponent implements OnInit, DoCheck {
   @HostBinding('style')
   get myStyle(): SafeStyle {
     return this.sanitizer.bypassSecurityTrustStyle('display: flex; justify-content: center;');
   }
 
+  @ViewChild('anchorScroll')
+  anchorScroll!: ElementRef;
   @Input('data')
   data: TreeFlowNode[][] | TreeFlowNode[] = [];
 
@@ -72,6 +74,9 @@ export class NgxTreeFlowComponent implements OnInit {
   @Input('horizontalAlign')
   horizontalAlign: 'start' | 'center' | 'end' = 'center';
 
+  @Input('scrollOnActive')
+  scrollOnActive: boolean = false;
+
   protected viewBox: string | undefined = undefined;
   protected viewBoxNode: string | undefined = undefined;
   protected viewBoxJoinNode: string | undefined = undefined;
@@ -87,9 +92,15 @@ export class NgxTreeFlowComponent implements OnInit {
   private _data: TreeFlowNode[][] = [];
   protected viewboxHeight!: number;
 
-  constructor(private sanitizer: DomSanitizer) {}
+  private itemDifferMap = new Map<string, any>();
+  private itemMap = new Map<string, TreeFlowNode>();
+
+  constructor(private sanitizer: DomSanitizer, private kvDiffers: KeyValueDiffers) {
+    this.id = this.newGuid();
+  }
 
   protected isLinear = true;
+  protected readonly id!: string;
 
   ngOnInit(): void {
     //choose if data is a linear array or if it is nested with multiple possible elements
@@ -196,5 +207,47 @@ export class NgxTreeFlowComponent implements OnInit {
     if (vShift <= 0) vShift = 0;
 
     this.verticalAlignTranslate = `translate(0, ${vShift})`;
+
+    this._data.forEach((level) => {
+      level.forEach((n) => {
+        this.itemDifferMap.set(this.id + n.id.toString(), this.kvDiffers.find(n).create());
+        this.itemMap.set(this.id + n.id.toString(), n);
+      });
+    });
+  }
+
+  ngDoCheck(): void {
+    if (this.scrollOnActive) {
+      for (let [key, nodeDiff] of this.itemDifferMap) {
+        const anyChanges = nodeDiff.diff(this.itemMap.get(key));
+        if (anyChanges) {
+          anyChanges.forEachChangedItem((record: { readonly key: string; previousValue: any; currentValue: any }) => {
+            if (record.key === 'state' && record.previousValue !== record.currentValue) {
+              // console.log('node state value change' + JSON.stringify(this.itemMap.get(key)));
+            }
+          });
+        }
+      }
+    }
+  }
+
+  protected change() {
+    console.log('change');
+  }
+  protected scroll() {
+    console.log('scroll');
+
+    var anchor: HTMLAnchorElement = this.anchorScroll.nativeElement as HTMLAnchorElement;
+    anchor.href = `#${this.id}_node_17`;
+    anchor.click();
+  }
+
+  //Generate a prefix id for each compoent
+  private newGuid(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (Math.random() * 16) | 0,
+        v = c == 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
   }
 }
