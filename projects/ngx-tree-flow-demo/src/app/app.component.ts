@@ -23,22 +23,13 @@ export class AppComponent implements OnInit {
       state: TreeFlowNodeState.default,
     });
 
-    this.linearData.push({
-      id: 1,
-      label: 'Start',
-      state: TreeFlowNodeState.completed,
-    });
-
-    this.linearData.push({
-      id: 2,
-      label: 'Step1',
-      state: TreeFlowNodeState.error,
-    });
-    this.linearData.push({
-      id: 3,
-      label: 'Complete',
-      state: TreeFlowNodeState.disabled,
-    });
+    for (var i = 1; i < 20; i++) {
+      this.linearData.push({
+        id: i,
+        label: 'Start',
+        state: i < 6 ? TreeFlowNodeState.completed : i == 6 ? TreeFlowNodeState.active : TreeFlowNodeState.enabled,
+      });
+    }
 
     const a = {
       id: 1,

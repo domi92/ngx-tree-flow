@@ -10,11 +10,10 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   styleUrls: ['./ngx-tree-flow.component.scss'],
 })
 export class NgxTreeFlowComponent implements OnInit {
-
-   @HostBinding('style')
-   get myStyle(): SafeStyle {
-      return this.sanitizer.bypassSecurityTrustStyle('display: flex; justify-content: center;');
-   }
+  @HostBinding('style')
+  get myStyle(): SafeStyle {
+    return this.sanitizer.bypassSecurityTrustStyle('display: flex; justify-content: center;');
+  }
 
   @Input('data')
   data: TreeFlowNode[][] | TreeFlowNode[] = [];
@@ -70,6 +69,9 @@ export class NgxTreeFlowComponent implements OnInit {
   @Input('fitParent')
   fitParent: boolean = false;
 
+  @Input('horizontalAlign')
+  horizontalAlign: 'start' | 'center' | 'end' = 'center';
+
   protected viewBox: string | undefined = undefined;
   protected viewBoxNode: string | undefined = undefined;
   protected viewBoxJoinNode: string | undefined = undefined;
@@ -85,7 +87,7 @@ export class NgxTreeFlowComponent implements OnInit {
   private _data: TreeFlowNode[][] = [];
   protected viewboxHeight!: number;
 
-  constructor(private sanitizer:DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {}
 
   protected isLinear = true;
 
@@ -151,7 +153,7 @@ export class NgxTreeFlowComponent implements OnInit {
       }
       this.design.push(designNodes);
 
-      if (level.length >= 2 ||(nextLevelIndex !== -1 && this._data[nextLevelIndex -1].length >= 2)) {
+      if (level.length >= 2 || (nextLevelIndex !== -1 && this._data[nextLevelIndex - 1].length >= 2)) {
         if (this._data.indexOf(level) + 1 != this._data.length || this.useEndingJoinNode) {
           levelIndex++;
 
@@ -166,7 +168,6 @@ export class NgxTreeFlowComponent implements OnInit {
           joiningNode.levelNodeCount = level.length;
           joiningNode.nextLevelNodeCount = nextLevelIndex == -1 ? 0 : this._data[nextLevelIndex].length;
           //joiningNode.isJoinNode = true;
-
 
           this.design.push([joiningNode]);
         }
