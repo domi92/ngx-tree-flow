@@ -1,48 +1,47 @@
-
 :host {
   height: 100%;
   display: block;
-   //Background color must be set here and is used as background of svg and to fill nodes (if not filled lines will be visible)
-   --ngx-tree-flow-background: #121212;
-   // default => default style is equal to disabled
-   --ngx-tree-flow-fill-color-node-default: var(--ngx-tree-flow-background);
-   --ngx-tree-flow-stroke-color-node-default: #CBCBCB;
-   --ngx-tree-flow-text-color-default: #CBCBCB;
-   /*disabled*/
-   --ngx-tree-flow-fill-color-node-disabled: var(--ngx-tree-flow-background);
-   --ngx-tree-flow-stroke-color-node-disabled: #CBCBCB;
-   --ngx-tree-flow-text-color-disabled: #CBCBCB;
-   /*enabled*/
-   --ngx-tree-flow-fill-color-node-enabled: var(--ngx-tree-flow-background);
-   --ngx-tree-flow-stroke-color-node-enabled: white;
-   --ngx-tree-flow-text-color-enabled: white;
-   /*active*/
-   --ngx-tree-flow-fill-color-node-active: white;
-   --ngx-tree-flow-stroke-color-node-active: white;
-   --ngx-tree-flow-text-color-active: var(--ngx-tree-flow-background);
-   /*completed*/
-   --ngx-tree-flow-fill-color-node-completed: #797979;
-   --ngx-tree-flow-stroke-color-node-completed: #797979;
-   --ngx-tree-flow-text-color-completed: var(--ngx-tree-flow-background);
-   /*error*/
-   --ngx-tree-flow-fill-color-node-error: #B22F00;
-   --ngx-tree-flow-stroke-color-node-error: #D73B04;
-   --ngx-tree-flow-text-color-error: white;
-   /*others*/
-   --ngx-tree-flow-text-font-size: 0.9rem;
-   --ngx-tree-flow-line-color: darkgray;
+  //Background color must be set here and is used as background of svg and to fill nodes (if not filled lines will be visible)
+  --ngx-tree-flow-background: #121212;
+  // default => default style is equal to disabled
+  --ngx-tree-flow-fill-color-node-default: var(--ngx-tree-flow-background);
+  --ngx-tree-flow-stroke-color-node-default: #cbcbcb;
+  --ngx-tree-flow-text-color-default: #cbcbcb;
+  /*disabled*/
+  --ngx-tree-flow-fill-color-node-disabled: var(--ngx-tree-flow-background);
+  --ngx-tree-flow-stroke-color-node-disabled: #cbcbcb;
+  --ngx-tree-flow-text-color-disabled: #cbcbcb;
+  /*enabled*/
+  --ngx-tree-flow-fill-color-node-enabled: var(--ngx-tree-flow-background);
+  --ngx-tree-flow-stroke-color-node-enabled: white;
+  --ngx-tree-flow-text-color-enabled: white;
+  /*active*/
+  --ngx-tree-flow-fill-color-node-active: white;
+  --ngx-tree-flow-stroke-color-node-active: white;
+  --ngx-tree-flow-text-color-active: var(--ngx-tree-flow-background);
+  /*completed*/
+  --ngx-tree-flow-fill-color-node-completed: #797979;
+  --ngx-tree-flow-stroke-color-node-completed: #797979;
+  --ngx-tree-flow-text-color-completed: var(--ngx-tree-flow-background);
+  /*error*/
+  --ngx-tree-flow-fill-color-node-error: #b22f00;
+  --ngx-tree-flow-stroke-color-node-error: #d73b04;
+  --ngx-tree-flow-text-color-error: white;
+  /*others*/
+  --ngx-tree-flow-text-font-size: 0.9rem;
+  --ngx-tree-flow-line-color: darkgray;
 }
 
 .linearLabel {
   stroke: var(--ngx-tree-flow-text-color-enabled) !important;
   fill: var(--ngx-tree-flow-text-color-enabled) !important;
-  font-family: "Aktiv Grotesk", Arial, sans-serif;
+  font-family: 'Aktiv Grotesk', Arial, sans-serif;
   font-size: 0.9rem;
   line-height: 1.15625rem;
-  letter-spacing: .03125rem;
+  letter-spacing: 0.03125rem;
 }
 
-line{
+line {
   &.line-color-default {
     stroke: var(--ngx-tree-flow-line-color);
   }
@@ -129,7 +128,8 @@ text {
   }
 }
 
-.fit{
+.fit {
   height: 99% !important;
   width: 100% !important;
+  overflow: hidden;
 }

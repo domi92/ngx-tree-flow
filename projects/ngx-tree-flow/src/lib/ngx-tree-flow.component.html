@@ -1,5 +1,6 @@
 <div
-  style="width: 100%; display: flex"
+  #scrollableDiv
+  style="width: 100%; display: flex; overflow: auto"
   [class.fit]="fitParent"
   [style.justify-content]="
     horizontalAlign === 'center' ? 'center' : horizontalAlign === 'start' ? 'flex-start' : 'flex-end'
