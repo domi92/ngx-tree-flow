@@ -1,8 +1,8 @@
-import { Component, DoCheck, ElementRef, HostBinding, Input, KeyValueDiffers, OnInit, ViewChild } from '@angular/core';
-import { TreeFlowNodeState } from './resource/TreeFlowNodeState';
-import { TreeFlowNode } from './resource/TreeFlowNode';
-import { DesignTreeFlowNode } from './resource/DesignTreeFlowNode';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import {Component, DoCheck, ElementRef, HostBinding, Inject, Input, KeyValueDiffers, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {TreeFlowNodeState} from './resource/TreeFlowNodeState';
+import {TreeFlowNode} from './resource/TreeFlowNode';
+import {DesignTreeFlowNode} from './resource/DesignTreeFlowNode';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'ngx-tree-flow',
@@ -10,13 +10,9 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
   styleUrls: ['./ngx-tree-flow.component.scss'],
 })
 export class NgxTreeFlowComponent implements OnInit, DoCheck {
-  @HostBinding('style')
-  get myStyle(): SafeStyle {
-    return this.sanitizer.bypassSecurityTrustStyle('display: flex; justify-content: center;');
-  }
-
   @ViewChild('anchorScroll')
   anchorScroll!: ElementRef;
+
   @Input('data')
   data: TreeFlowNode[][] | TreeFlowNode[] = [];
 
@@ -66,16 +62,16 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
   hideLinearModelLabel = false;
 
   @Input('disableAutoLineColor')
-  disableAutoLineColor: boolean = false;
+  disableAutoLineColor = false;
 
   @Input('fitParent')
-  fitParent: boolean = false;
+  fitParent = false;
 
   @Input('horizontalAlign')
   horizontalAlign: 'start' | 'center' | 'end' = 'center';
 
   @Input('scrollOnActive')
-  scrollOnActive: boolean = false;
+  scrollOnActive = false;
 
   protected viewBox: string | undefined = undefined;
   protected viewBoxNode: string | undefined = undefined;
@@ -95,10 +91,15 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
   private itemDifferMap = new Map<string, any>();
   private itemMap = new Map<string, TreeFlowNode>();
 
-  constructor(private sanitizer: DomSanitizer, private kvDiffers: KeyValueDiffers) {
+  private document: Document;
+
+  constructor(@Inject(DOCUMENT) document: Document, private kvDiffers: KeyValueDiffers) {
     this.id = this.newGuid();
+    this.document = document;
   }
 
+  protected singleNode!: DesignTreeFlowNode;
+  protected isSingleNode = false;
   protected isLinear = true;
   protected readonly id!: string;
 
@@ -191,18 +192,20 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
     }
 
     this.viewBox = `0 0 ${this.viewboxWidth} ${this.viewboxHeight}`;
-    this.viewBoxNode = `0 0 ${this.nodeRadius * 2 + this.nodeStrokeWidth} ${
-      this.nodeRadius * 2 + this.nodeStrokeWidth
-    }`;
-    this.viewBoxJoinNode = `0 0 ${this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth} ${
-      this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth
-    }`;
+    this.viewBoxNode = `0 0 ${this.nodeRadius * 2 + this.nodeStrokeWidth} ${this.nodeRadius * 2 + this.nodeStrokeWidth}`;
+    this.viewBoxJoinNode = `0 0 ${this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth} ${this.nodeJoinRadius * 2 + this.nodeJoinStrokeWidth}`;
 
     let vShift = 0;
     if (this.design.length === 1) {
+      this.singleNode = this.design[0][0];
       vShift = (this.viewboxHeight - this.nodeRadius * 2) / 2;
-    } else if (this.design.length > 1)
-      vShift = (this.viewboxHeight - this.levelSpacing * (this.design.length - 1) - this.nodeRadius * 2) / 2;
+      this.isSingleNode = true;
+      this.viewBox = `0 0 100 100`;
+      this.viewBoxNode = this.viewBox;
+      this.nodeRadius = 40;
+      this.nodeStrokeWidth = 5;
+      this.fitParent = true;
+    } else if (this.design.length > 1) vShift = (this.viewboxHeight - this.levelSpacing * (this.design.length - 1) - this.nodeRadius * 2) / 2;
 
     if (vShift <= 0) vShift = 0;
 
@@ -210,20 +213,23 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
 
     this._data.forEach((level) => {
       level.forEach((n) => {
-        this.itemDifferMap.set(this.id + n.id.toString(), this.kvDiffers.find(n).create());
-        this.itemMap.set(this.id + n.id.toString(), n);
+        const id = this.id + '_node_' + n.id.toString();
+        this.itemDifferMap.set(id, this.kvDiffers.find(n).create());
+        this.itemMap.set(id, n);
       });
     });
   }
 
   ngDoCheck(): void {
-    if (this.scrollOnActive) {
+    if (this.scrollOnActive && !this.fitParent) {
       for (let [key, nodeDiff] of this.itemDifferMap) {
         const anyChanges = nodeDiff.diff(this.itemMap.get(key));
         if (anyChanges) {
-          anyChanges.forEachChangedItem((record: { readonly key: string; previousValue: any; currentValue: any }) => {
+          anyChanges.forEachChangedItem((record: {readonly key: string; previousValue: any; currentValue: any}) => {
             if (record.key === 'state' && record.previousValue !== record.currentValue) {
-              // console.log('node state value change' + JSON.stringify(this.itemMap.get(key)));
+              if (record.currentValue === TreeFlowNodeState.active) {
+                this.scrollToActiveNode(key);
+              }
             }
           });
         }
@@ -231,22 +237,25 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
     }
   }
 
-  protected change() {
-    console.log('change');
-  }
-  protected scroll() {
-    console.log('scroll');
+  protected scrollToActiveNode(nodeId: string) {
+    const t = this.document.getElementById(nodeId) as HTMLElement;
+    t?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest',
+    });
 
-    var anchor: HTMLAnchorElement = this.anchorScroll.nativeElement as HTMLAnchorElement;
-    anchor.href = `#${this.id}_node_17`;
-    anchor.click();
+    //var anchor: HTMLAnchorElement = this.anchorScroll.nativeElement as HTMLAnchorElement;
+    ////anchor.href = `#${this.id}_node_17`;
+    //anchor.onclick =
+    //anchor.click();
   }
 
   //Generate a prefix id for each compoent
   private newGuid(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = (Math.random() * 16) | 0,
-        v = c == 'x' ? r : (r & 0x3) | 0x8;
+      const r = (Math.random() * 16) | 0;
+      const v = c == 'x' ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
   }

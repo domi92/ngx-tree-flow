@@ -1,33 +1,67 @@
 <div
-  style="width: 100%; display: flex; overflow: auto; scroll-behavior: smooth"
+  style="display: flex; height: 100%; overflow: auto; scroll-behavior: smooth; width: 100%"
   [class.fit]="fitParent"
-  [style.justify-content]="
-    horizontalAlign === 'center' ? 'center' : horizontalAlign === 'start' ? 'flex-start' : 'flex-end'
-  "
-  (click)="scroll()"
->
-  <!-- <a href="#node_1">scroll</a> -->
-
-  <a #anchorScroll style="position: absolute; visibility: hidden"></a>
+  [style.justify-content]="horizontalAlign === 'center' ? 'center' : horizontalAlign === 'start' ? 'flex-start' : 'flex-end'">
   <div
+    style="height: 100%; width: 100%"
     [ngStyle]="{
       'max-width': maxWidth ?? 'auto',
       'min-width': minWidth ?? 'auto'
-    }"
-  >
+    }">
     <svg
       preserveAspectRatio="xMidYMid meet"
       [attr.transform]="'rotate(-' + rotation + ')'"
-      style="width: 100%"
+      style="display: flex; width: 100%"
       [class.fit]="fitParent"
       [attr.viewBox]="viewBox"
       xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-    >
-      <?xml -stylesheet=-stylesheet type="text/css" href="ngx-tree-flow.component.scss" ?>
-
-      <!-- <rect width="100%" height="100%" style="stroke: red; stroke-width: 5" /> -->
-      <g [attr.transform]="isLinear && !hideLinearModelLabel ? 'translate(-' + (viewboxWidth * 1) / 4 + ',0)' : ''">
+      version="1.1">
+      <?xml            -stylesheet=-stylesheet            type="text/css"            href="ngx-tree-flow.component.scss"?>
+      <g *ngIf="isSingleNode">
+        <svg
+          [attr.width]="100"
+          [attr.height]="99"
+          [attr.viewBox]="viewBoxNode"
+          [attr.x]="0"
+          [attr.y]="0"
+          [class.node-default]="singleNode.state === states.default"
+          [class.node-disabled]="singleNode.state === states.disabled"
+          [class.node-enabled]="singleNode.state === states.enabled"
+          [class.node-active]="singleNode.state === states.active"
+          [class.node-completed]="singleNode.state === states.completed"
+          [class.node-error]="singleNode.state === states.error">
+          <circle cx="50%" cy="50%" [attr.r]="nodeRadius" [attr.stroke-width]="nodeStrokeWidth" />
+          <text
+            *ngIf="useLabels"
+            [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+            transform-origin="center"
+            [attr.transform]="'rotate(' + rotation + ')'"
+            dominant-baseline="central "
+            text-anchor="middle">
+            <tspan y="50%" x="50%">{{ singleNode.label ?? '' }}</tspan>
+          </text>
+          <text
+            *ngIf="!useLabels"
+            [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+            transform-origin="center"
+            [attr.transform]="'rotate(' + rotation + ')'"
+            dominant-baseline="middle"
+            text-anchor="middle">
+            <tspan y="50%" x="50%">{{ singleNode.id }}</tspan>
+          </text>
+        </svg>
+      </g>
+      <g
+        *ngIf="!isSingleNode"
+        [attr.transform]="
+          isLinear && !hideLinearModelLabel
+            ? horizontalAlign === 'center'
+              ? 'translate(-' + viewboxWidth / 4 + ',0)'
+              : horizontalAlign === 'start'
+              ? 'translate(-' + (viewboxWidth / 2 - nodeRadius - nodeStrokeWidth * 2) + ',0)'
+              : ''
+            : ''
+        ">
         <!-- connection lines -->
         <g *ngFor="let row of design; let rowIndex = index" [attr.transform]="verticalAlignTranslate">
           <g *ngFor="let node of row; let nodeIndex = index">
@@ -48,8 +82,7 @@
                   [attr.y1]="design[rowIndex - 1][prev].dy + nodeRadius"
                   [attr.x2]="node.dx + nodeRadius"
                   [attr.y2]="node.dy + nodeRadius"
-                  [attr.stroke-width]="lineStrokeWidth"
-                />
+                  [attr.stroke-width]="lineStrokeWidth" />
               </g>
             </g>
             <g *ngIf="!node.isJoinNode">
@@ -69,8 +102,7 @@
                   [attr.y1]="design[rowIndex - 1][0].dy + nodeRadius"
                   [attr.x2]="node.dx + nodeRadius"
                   [attr.y2]="node.dy + nodeRadius"
-                  [attr.stroke-width]="lineStrokeWidth"
-                />
+                  [attr.stroke-width]="lineStrokeWidth" />
               </g>
             </g>
           </g>
@@ -91,8 +123,7 @@
                   [class.node-enabled]="node.state === states.enabled"
                   [class.node-active]="node.state === states.active"
                   [class.node-completed]="node.state === states.completed"
-                  [class.node-error]="node.state === states.error"
-                >
+                  [class.node-error]="node.state === states.error">
                   <circle cx="50%" cy="50%" [attr.r]="nodeJoinRadius" [attr.stroke-width]="nodeJoinStrokeWidth" />
                 </svg>
               </g>
@@ -109,54 +140,46 @@
                   [class.node-enabled]="node.state === states.enabled"
                   [class.node-active]="node.state === states.active"
                   [class.node-completed]="node.state === states.completed"
-                  [class.node-error]="node.state === states.error"
-                >
-                  <circle
-                    cx="50%"
-                    cy="50%"
-                    [attr.r]="nodeRadius"
-                    [attr.stroke-width]="nodeStrokeWidth"
-                    (change)="change()"
-                  />
+                  [class.node-error]="node.state === states.error">
+                  <circle cx="50%" cy="50%" [attr.r]="nodeRadius" [attr.stroke-width]="nodeStrokeWidth" />
                   <text
                     *ngIf="useLabels"
                     transform-origin="center"
+                    [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
                     [attr.transform]="'rotate(' + rotation + ')'"
                     dominant-baseline="central "
-                    text-anchor="middle"
-                  >
+                    text-anchor="middle">
                     <tspan y="50%" x="50%">{{ node.label ?? '' }}</tspan>
                   </text>
                   <text
                     *ngIf="!useLabels"
                     transform-origin="center"
+                    [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
                     [attr.transform]="'rotate(' + rotation + ')'"
                     dominant-baseline="middle"
-                    text-anchor="middle"
-                  >
+                    text-anchor="middle">
                     <tspan y="50%" x="50%">{{ node.id }}</tspan>
                   </text>
                 </svg>
                 <svg
                   *ngIf="isLinear && !hideLinearModelLabel"
-                  [attr.height]="nodeRadius * 2"
-                  [attr.width]="viewboxWidth / 2"
                   [attr.x]="node.dx + nodeRadius * 2"
                   [attr.y]="node.dy"
+                  [attr.height]="nodeRadius * 2 + nodeStrokeWidth * 2"
+                  [attr.width]="'100%'"
                   [class.node-default]="node.state === states.default"
                   [class.node-disabled]="node.state === states.disabled"
                   [class.node-enabled]="node.state === states.enabled"
                   [class.node-active]="node.state === states.active"
                   [class.node-completed]="node.state === states.completed"
-                  [class.node-error]="node.state === states.error"
-                >
+                  [class.node-error]="node.state === states.error">
                   <text
                     transform-origin="center"
                     [attr.transform]="'rotate(' + rotation + ')'"
-                    dominant-baseline="central "
-                    text-anchor="start"
-                  >
-                    <tspan class="linearLabel" y="50%" x="10%">
+                    dominant-baseline="central"
+                    [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+                    text-anchor="start">
+                    <tspan class="linearLabel" y="50%" x="2%">
                       {{ node.label ?? '' }}
                     </tspan>
                   </text>

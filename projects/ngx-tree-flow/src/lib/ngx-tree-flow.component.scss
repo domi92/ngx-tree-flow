@@ -1,6 +1,9 @@
 :host {
   height: 100%;
   display: block;
+}
+
+:host {
   //Background color must be set here and is used as background of svg and to fill nodes (if not filled lines will be visible)
   --ngx-tree-flow-background: #121212;
   // default => default style is equal to disabled

@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   protected data: TreeFlowNode[][] = [];
   protected scrollingData: TreeFlowNode[][] = [];
 
+  protected linearDataActive!: TreeFlowNode;
   protected linearData: TreeFlowNode[] = [];
 
   protected singleData: TreeFlowNode[] = [];
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
       this.linearData.push({
         id: i,
         label: 'Start',
-        state: i < 6 ? TreeFlowNodeState.completed : i == 6 ? TreeFlowNodeState.active : TreeFlowNodeState.enabled,
+        state: TreeFlowNodeState.enabled,
       });
     }
 
@@ -117,6 +118,19 @@ export class AppComponent implements OnInit {
             h.state = TreeFlowNodeState.active;
             break;
         }
+
+        if (!this.linearDataActive) {
+          this.linearDataActive = this.linearData[0];
+        } else {
+          const index = this.linearData.findIndex((e) => e === this.linearDataActive);
+          if (index < this.linearData.length - 1) this.linearDataActive = this.linearData[index + 1];
+          else {
+            this.linearData.forEach((e) => (e.state = TreeFlowNodeState.enabled));
+            this.linearDataActive = this.linearData[0];
+          }
+        }
+
+        this.linearDataActive.state = TreeFlowNodeState.active;
       },
     });
   }
