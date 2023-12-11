@@ -42,7 +42,7 @@
           </text>
           <text
             *ngIf="!useLabels"
-            [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+            [attr.font-size]="nodeRadius - nodeStrokeWidth"
             transform-origin="center"
             [attr.transform]="'rotate(' + rotation + ')'"
             dominant-baseline="middle"
@@ -145,7 +145,7 @@
                   <text
                     *ngIf="useLabels"
                     transform-origin="center"
-                    [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+                    [attr.font-size]="((nodeRadius * 2 - nodeStrokeWidth * 2) * 2.5) / 4"
                     [attr.transform]="'rotate(' + rotation + ')'"
                     dominant-baseline="central "
                     text-anchor="middle">
@@ -154,7 +154,7 @@
                   <text
                     *ngIf="!useLabels"
                     transform-origin="center"
-                    [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+                    [attr.font-size]="((nodeRadius * 2 - nodeStrokeWidth * 2) * 2.5) / 4"
                     [attr.transform]="'rotate(' + rotation + ')'"
                     dominant-baseline="middle"
                     text-anchor="middle">
@@ -177,7 +177,7 @@
                     transform-origin="center"
                     [attr.transform]="'rotate(' + rotation + ')'"
                     dominant-baseline="central"
-                    [attr.font-size]="nodeRadius - nodeStrokeWidth * 2"
+                    [attr.font-size]="((nodeRadius * 2 - nodeStrokeWidth * 2) * 3) / 4"
                     text-anchor="start">
                     <tspan class="linearLabel" y="50%" x="2%">
                       {{ node.label ?? '' }}

@@ -1,4 +1,7 @@
-// * {
-//   --fill-color-node-error: yellow !important;
-//   --stroke-color-node-error: yellow !important;
-// }
+:host {
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}

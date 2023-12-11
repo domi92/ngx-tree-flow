@@ -54,7 +54,10 @@
             "tsConfig": "projects/ngx-tree-flow-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["projects/ngx-tree-flow-demo/src/favicon.ico", "projects/ngx-tree-flow-demo/src/assets"],
-            "styles": ["projects/ngx-tree-flow-demo/src/styles.scss"],
+            "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/ngx-tree-flow-demo/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -109,7 +112,10 @@
             "tsConfig": "projects/ngx-tree-flow-demo/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": ["projects/ngx-tree-flow-demo/src/favicon.ico", "projects/ngx-tree-flow-demo/src/assets"],
-            "styles": ["projects/ngx-tree-flow-demo/src/styles.scss"],
+            "styles": [
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "projects/ngx-tree-flow-demo/src/styles.scss"
+            ],
             "scripts": []
           }
         }

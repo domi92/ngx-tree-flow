@@ -31,7 +31,6 @@
   --ngx-tree-flow-stroke-color-node-error: #d73b04;
   --ngx-tree-flow-text-color-error: white;
   /*others*/
-  --ngx-tree-flow-text-font-size: 0.9rem;
   --ngx-tree-flow-line-color: darkgray;
 }
 
@@ -39,7 +38,6 @@
   stroke: var(--ngx-tree-flow-text-color-enabled) !important;
   fill: var(--ngx-tree-flow-text-color-enabled) !important;
   font-family: 'Aktiv Grotesk', Arial, sans-serif;
-  font-size: 0.9rem;
   line-height: 1.15625rem;
   letter-spacing: 0.03125rem;
 }
@@ -67,10 +65,6 @@ line {
 }
 .line-error {
   stroke: var(--ngx-tree-flow-stroke-color-node-error);
-}
-
-text {
-  font-size: var(--ngx-tree-flow-text-font-size);
 }
 
 .node-default {

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { TreeFlowNode } from 'projects/ngx-tree-flow/src/lib/resource/TreeFlowNode';
-import { TreeFlowNodeState } from 'projects/ngx-tree-flow/src/lib/resource/TreeFlowNodeState';
-import { interval } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {TreeFlowNode} from 'projects/ngx-tree-flow/src/lib/resource/TreeFlowNode';
+import {TreeFlowNodeState} from 'projects/ngx-tree-flow/src/lib/resource/TreeFlowNodeState';
+import {interval} from 'rxjs';
 
 @Component({
   selector: 'ngx-demo-root',
@@ -9,7 +9,7 @@ import { interval } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  protected data: TreeFlowNode[][] = [];
+  protected fistData: TreeFlowNode[][] = [];
   protected scrollingData: TreeFlowNode[][] = [];
 
   protected linearDataActive!: TreeFlowNode;
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
       state: TreeFlowNodeState.default,
     });
 
-    for (var i = 1; i < 20; i++) {
+    for (var i = 1; i < 24; i++) {
       this.linearData.push({
         id: i,
         label: 'Start',
@@ -72,50 +72,42 @@ export class AppComponent implements OnInit {
     const h: TreeFlowNode = {
       id: 8,
       label: 'H',
-      state: TreeFlowNodeState.error,
+      state: TreeFlowNodeState.disabled,
     };
 
-    this.data.push([a, b]);
+    this.fistData.push([a, b]);
 
-    this.data.push([c]);
+    this.fistData.push([c]);
 
-    this.data.push([d, e]);
-    this.data.push([f, g, h]);
+    this.fistData.push([d, e]);
+    this.fistData.push([f, g, h]);
     // this.data.push([e]);
-    this.scrollingData = [...this.data];
+    this.scrollingData = [...this.fistData];
 
-    this.scrollingData.push([a]);
-    this.scrollingData.push([a]);
-    this.scrollingData.push([a]);
-    this.scrollingData.push([a]);
-    this.scrollingData.push([a]);
-    this.scrollingData.push([a]);
-    this.scrollingData.push([a]);
-
-    const source = interval(1000);
+    const source = interval(1600);
 
     const subscribe = source.subscribe({
       next: (t) => {
         // this.rotation ++;
 
-        switch (h.state) {
+        switch (e.state) {
           case TreeFlowNodeState.active:
-            h.state = TreeFlowNodeState.completed;
+            e.state = TreeFlowNodeState.completed;
             break;
           case TreeFlowNodeState.completed:
-            h.state = TreeFlowNodeState.disabled;
+            e.state = TreeFlowNodeState.disabled;
             break;
           case TreeFlowNodeState.disabled:
-            h.state = TreeFlowNodeState.enabled;
+            e.state = TreeFlowNodeState.enabled;
             break;
           case TreeFlowNodeState.enabled:
-            h.state = TreeFlowNodeState.error;
+            e.state = TreeFlowNodeState.error;
             break;
           case TreeFlowNodeState.error:
-            h.state = TreeFlowNodeState.default;
+            e.state = TreeFlowNodeState.default;
             break;
           case TreeFlowNodeState.default:
-            h.state = TreeFlowNodeState.active;
+            e.state = TreeFlowNodeState.active;
             break;
         }
 

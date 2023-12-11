@@ -240,15 +240,10 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
   protected scrollToActiveNode(nodeId: string) {
     const t = this.document.getElementById(nodeId) as HTMLElement;
     t?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'auto',
       block: 'center',
       inline: 'nearest',
     });
-
-    //var anchor: HTMLAnchorElement = this.anchorScroll.nativeElement as HTMLAnchorElement;
-    ////anchor.href = `#${this.id}_node_17`;
-    //anchor.onclick =
-    //anchor.click();
   }
 
   //Generate a prefix id for each compoent

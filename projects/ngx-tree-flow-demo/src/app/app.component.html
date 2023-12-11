@@ -1,4 +1,94 @@
-<div style="display: flex">
+<div style="height: 100%">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Basic">
+      <div style="height: 90vh; width: 100vw; display: flex; column-gap: 0.1rem; justify-content: space-around">
+        <div style="height: 10%; width: 100%; background-color: rgb(80, 80, 80); color: white">
+          Generic basic examples with some layout customization available
+        </div>
+        <div style="height: 90%; width: 15%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">[useEndingJoinNode]="this" && [useStartingJoinNode]="tree"</div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow [data]="fistData"></ngx-tree-flow>
+          </div>
+        </div>
+        <div style="height: 90%; width: 15%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">[useEndingJoinNode]="false" && [useStartingJoinNode]="false" && [useLabels]="true"</div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow [data]="fistData" [useEndingJoinNode]="false" [useStartingJoinNode]="false" [useLabels]="true"></ngx-tree-flow>
+          </div>
+        </div>
+        <div style="height: 90%; width: 25%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">
+            [fitParent]="true". Try zoom in and out to see that element keep parent dimensions, while other component change dimension
+          </div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow [data]="fistData" [useEndingJoinNode]="false" [useStartingJoinNode]="true" [fitParent]="true"></ngx-tree-flow>
+          </div>
+        </div>
+        <div style="height: 90%; width: 25%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">
+            Some style customization: [nodeRadius]="30" [nodeStrokeWidth]="8" [nodeJoinRadius]="14" [nodeJoinStrokeWidth]="1" [levelSpacing]="110"
+          </div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow
+              [data]="fistData"
+              [useEndingJoinNode]="false"
+              [nodeRadius]="30"
+              [nodeStrokeWidth]="8"
+              [nodeJoinRadius]="14"
+              [nodeJoinStrokeWidth]="1"
+              [levelSpacing]="110"
+              [useStartingJoinNode]="true"
+              [fitParent]="true"></ngx-tree-flow>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Linear">
+      <div style="height: 90vh; width: 100vw; display: flex; column-gap: 0.1rem; justify-content: space-around">
+        <div style="height: 10%; width: 100%; background-color: rgb(80, 80, 80); color: white">
+          Generic basic examples with some layout customization available
+        </div>
+        <div style="height: 90%; width: 15%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">default linear component</div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow [data]="linearData"></ngx-tree-flow>
+          </div>
+        </div>
+        <div style="height: 90%; width: 15%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">[scrollOnActive]="true" to enable aout scrolling to acrive node</div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow [data]="linearData" [scrollOnActive]="true"></ngx-tree-flow>
+          </div>
+        </div>
+        <div style="height: 90%; width: 15%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 10%">Zoom element option 1: change [viewboxWidth]="200" (dafault 500)</div>
+          <div style="height: 90%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow [data]="linearData" [scrollOnActive]="true" [viewboxWidth]="200"></ngx-tree-flow>
+          </div>
+        </div>
+        <div style="height: 90%; width: 15%; background-color: #1b1919; color: white; display: flex; flex-direction: column">
+          <div style="height: 15%">
+            Zoom element option 2: change element sytle dimension [nodeRadius]="40" [nodeStrokeWidth]="4" [lineStrokeWidth]="4" [levelSpacing]="140"
+          </div>
+          <div style="height: 85%; background-color: rgb(73, 73, 73)">
+            <ngx-tree-flow
+              [data]="linearData"
+              [scrollOnActive]="false"
+              [nodeRadius]="40"
+              [nodeStrokeWidth]="4"
+              [lineStrokeWidth]="4"
+              [scrollOnActive]="true"
+              [levelSpacing]="140"></ngx-tree-flow>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Third"> Content 3 </mat-tab>
+  </mat-tab-group>
+</div>
+
+<!-- <div style="display: flex">
   <div style="height: 48vh; width: 50%; background-color: rgb(73, 73, 73)">
     <ngx-tree-flow
       maxWidth="300px"
@@ -30,7 +120,7 @@
       [scrollOnActive]="true"
       [useEndingJoinNode]="false"></ngx-tree-flow>
   </div>
-  <!-- <div style="height: 48vh; width: auto; background-color: rgb(73, 73, 73)">
+  <div style="height: 48vh; width: auto; background-color: rgb(73, 73, 73)">
     <ngx-tree-flow
       maxWidth="300px"
       minWidth="300px"
@@ -39,8 +129,8 @@
       [data]="singleData"
       [levelSpacing]="60"
       [useEndingJoinNode]="false"></ngx-tree-flow>
-  </div> -->
-</div>
+  </div>
+</div> -->
 <div style="display: flex; justify-content: space-evenly">
   <!-- <div style="height: 48vh; width: 48vw; background-color: rgb(15, 15, 15)">
     <ngx-tree-flow
