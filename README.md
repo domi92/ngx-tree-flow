@@ -24,8 +24,18 @@ export class AppModule {}
 * Generic example of some possible output results
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/d5189481-5454-43c6-a6e3-78caa44ed692" width=65%/>
 
+* running demo project some example with attribute description are avaialble like:
+
+-basic example
+
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/0ffb5746-d55d-430e-8a22-0047dbd82f71" width=65%/>
+
+-linear tree example
+
+<img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/87b0a87c-262a-452b-b930-12839d566139" width=65%/>
+
 # Usage
-* import into your component
+* import:
 ```typescript
 import { TreeFlowNode, TreeFlowNodeState } from 'ngx-tree-flow';
 ```
@@ -65,7 +75,7 @@ Labels are dispalyed only when displayed tree is linear (simple data array is us
 
 # Rotation
 
-* **@Input('rotation')** [rotation]="90". Insert degree to rotate image. 90 flip horizontally. Any other degree can be used (75 in  third image exampe). Rotation can be used to animate diagram
+* **@Input('rotation')** [rotation]="90". Insert degree to rotate image. 90 flip horizontally. Any other degree can be used (75 in  third image exampe). Rotation can be used to create some simple animation
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/7527f093-6b73-42ba-b4bc-bbb71807aded" width=30%/>
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/00877e18-4985-487d-9694-a4345f395126" width=30%/>
 <img src="https://github.com/domi92/ngx-tree-flow/assets/10332144/82aba907-40f9-46cc-a754-f4ce66a9864e" width=30%/>
