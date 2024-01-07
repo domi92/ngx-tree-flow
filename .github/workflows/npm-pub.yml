@@ -33,6 +33,6 @@ jobs:
 
       - name: Publish to NPM
         working-directory: dist/ngx-tree-flow/
-        run: npm publish
+        run: npm publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM}}

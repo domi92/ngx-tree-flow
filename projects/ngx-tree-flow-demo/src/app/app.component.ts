@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
       state: TreeFlowNodeState.default,
     });
 
-    for (var i = 1; i < 24; i++) {
+    for (var i = 1; i < 29; i++) {
       this.linearData.push({
         id: i,
         label: 'Start',
@@ -90,24 +90,26 @@ export class AppComponent implements OnInit {
       next: (t) => {
         // this.rotation ++;
 
-        switch (e.state) {
+        //Basic change e state
+        var node = c;
+        switch (node.state) {
           case TreeFlowNodeState.active:
-            e.state = TreeFlowNodeState.completed;
+            node.state = TreeFlowNodeState.completed;
             break;
           case TreeFlowNodeState.completed:
-            e.state = TreeFlowNodeState.disabled;
+            node.state = TreeFlowNodeState.disabled;
             break;
           case TreeFlowNodeState.disabled:
-            e.state = TreeFlowNodeState.enabled;
+            node.state = TreeFlowNodeState.enabled;
             break;
           case TreeFlowNodeState.enabled:
-            e.state = TreeFlowNodeState.error;
+            node.state = TreeFlowNodeState.error;
             break;
           case TreeFlowNodeState.error:
-            e.state = TreeFlowNodeState.default;
+            node.state = TreeFlowNodeState.default;
             break;
           case TreeFlowNodeState.default:
-            e.state = TreeFlowNodeState.active;
+            node.state = TreeFlowNodeState.active;
             break;
         }
 

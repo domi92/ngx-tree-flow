@@ -1,6 +1,6 @@
-import { TreeFlowNodeState } from './TreeFlowNodeState';
-import { ITreeFlowNode } from './ITreeFlowNode';
-import { IDesignTreeFlowNode } from './IDesignTreeFlowNode';
+import {TreeFlowNodeState} from './TreeFlowNodeState';
+import {ITreeFlowNode} from './ITreeFlowNode';
+import {IDesignTreeFlowNode} from './IDesignTreeFlowNode';
 
 export class DesignTreeFlowNode implements IDesignTreeFlowNode {
   private source: ITreeFlowNode;

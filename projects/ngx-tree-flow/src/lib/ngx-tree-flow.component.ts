@@ -137,7 +137,7 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
       //if first level has multiple object add a source node
 
       if (levelIndex == 1 && level.length >= 2) {
-        const joiningNode = new DesignTreeFlowNode(this.joinNode, this._data[nextLevelIndex]);
+        const joiningNode = new DesignTreeFlowNode(this.joinNode, this._data[levelIndex - 1]);
         joiningNode.levelIndex = levelIndex;
         joiningNode.dx = this.viewboxWidth / 2 - this.nodeRadius;
         joiningNode.dy = (levelIndex - 1) * this.levelSpacing;
@@ -238,12 +238,14 @@ export class NgxTreeFlowComponent implements OnInit, DoCheck {
   }
 
   protected scrollToActiveNode(nodeId: string) {
-    const t = this.document.getElementById(nodeId) as HTMLElement;
-    t?.scrollIntoView({
-      behavior: 'auto',
-      block: 'center',
-      inline: 'nearest',
-    });
+    setTimeout(() => {
+      const t = this.document.getElementById(nodeId) as HTMLElement;
+      t?.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'nearest',
+      });
+    }, 20);
   }
 
   //Generate a prefix id for each compoent
